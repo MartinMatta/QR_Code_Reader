@@ -7,37 +7,55 @@
     tools:context=".MainActivity"
     android:layout_margin="20dp"
     android:orientation="vertical"
-    android:gravity="center">
+    >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="700px"
-        android:layout_height="700px"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:paddingTop="32px"
-        app:srcCompat="@drawable/qrcode"/>
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:layout_margin="4dp"
-        android:hint="Enter text here" />
+        android:orientation="vertical"
+        android:background="@android:color/darker_gray"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/generate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Generate" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBotton="true"
+            android:layout_margin="1dp"
+            app:srcCompat="@drawable/qrcode"/>
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="save" />
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnKitchen"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_baseline_file_download_off_24"
+            android:layout_marginRight="8dp"
+            android:text="Save"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnRoom"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_baseline_share_24"
+            android:layout_marginLeft="8dp"
+            android:text="Share"
+            android:textColor="#FFFFFF" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
