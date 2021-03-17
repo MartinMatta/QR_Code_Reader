@@ -9,24 +9,13 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/darker_gray"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBotton="true"
-            android:layout_margin="1dp"
-            app:srcCompat="@drawable/qrcode"/>
-
-    </LinearLayout>
+        app:srcCompat="@drawable/qrcode"/>
 
 
     <LinearLayout
@@ -34,6 +23,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="32dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
@@ -54,8 +44,6 @@
             android:text="Share"
             android:textColor="#FFFFFF" />
 
-
     </LinearLayout>
-
 
 </LinearLayout>
