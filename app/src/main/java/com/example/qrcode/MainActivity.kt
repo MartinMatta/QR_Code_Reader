@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        scanQRCode()
+        //scanQRCode()
 
         //startActivityForResult(Intent(this@MainActivity, QrCodeActivity::class.java),101)
 
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         val integrator = IntentIntegrator(this).apply {
             captureActivity = CaptureActivity::class.java
             setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
-            set
             setPrompt("")
         }
         integrator.initiateScan()
