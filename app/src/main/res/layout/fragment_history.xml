@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".HistoryFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/textViewNotifiation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:drawableTop="@drawable/ic_baseline_qr_code_scanner_24"/>
+        android:layout_height="match_parent"
+        android:text="history" />
 
-    <EditText
-        android:id="@+id/editTextNotification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
-
-</RelativeLayout>
+</FrameLayout>
