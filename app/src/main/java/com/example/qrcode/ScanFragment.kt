@@ -11,6 +11,7 @@ class ScanFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.title = "Scan"
     }
 
     override fun onCreateView(
