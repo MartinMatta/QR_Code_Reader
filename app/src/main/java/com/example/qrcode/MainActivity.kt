@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private var backPressedTime: Long = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavigation)
-        //val text: TextView = findViewById(R.id.text)
 
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId) {
