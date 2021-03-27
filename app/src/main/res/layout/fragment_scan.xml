@@ -7,14 +7,27 @@
     tools:context=".ScanFragment"
     tools:ignore="MissingClass">
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner_view"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:frameCornersRadius="24dp"
-        app:frameColor="@color/white"
-        app:frameCornersSize="50sp"
-        android:paddingBottom="32dp"
-        app:maskColor="#3BCCCCCC"/>
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/qrcode" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round"
+            android:text="Scan code" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

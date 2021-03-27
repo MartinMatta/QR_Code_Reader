@@ -16,7 +16,7 @@ class ScanFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.title = "Scan"
+        //activity?.title = "Scan"
     }
 
     override fun onCreateView(
@@ -24,29 +24,4 @@ class ScanFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_scan, container, false)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val scannerView = view.findViewById<CodeScannerView>(R.id.scanner_view)
-        val activity = requireActivity()
-        codeScanner = CodeScanner(activity, scannerView)
-        codeScanner.decodeCallback = DecodeCallback {
-            activity.runOnUiThread {
-                Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
-            }
-        }
-        scannerView.setOnClickListener {
-            codeScanner.startPreview()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        codeScanner.startPreview()
-    }
-
-    override fun onPause() {
-        codeScanner.releaseResources()
-        super.onPause()
-    }
-
 }

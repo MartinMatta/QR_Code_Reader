@@ -10,7 +10,7 @@ class GenerateFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.title = "Generate"
+        //activity?.title = "Generate"
     }
 
     override fun onCreateView(

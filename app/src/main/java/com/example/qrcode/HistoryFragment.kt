@@ -10,7 +10,7 @@ class HistoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.title = "History"
+        //activity?.title = "History"
     }
 
     override fun onCreateView(
