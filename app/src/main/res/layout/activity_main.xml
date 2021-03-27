@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -12,11 +14,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/white"
-        app:itemIconSize="24dp"
-        app:elevation="2dp"
+        app:itemIconSize="32dp"
+        android:elevation="1dp"
+        android:background="@drawable/round"
         app:menu="@menu/navigation"/>
 
 </RelativeLayout>
