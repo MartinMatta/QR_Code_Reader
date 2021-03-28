@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.generate -> {
-                    startFragment(GenerateFragment())
+                    startFragment(ScanFragment())
                     true
                 }
                 R.id.history -> {
