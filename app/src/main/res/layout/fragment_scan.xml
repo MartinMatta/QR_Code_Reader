@@ -19,15 +19,15 @@
             android:id="@+id/imageView2"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/qrcode" />
+            android:src="@drawable/qrcode"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonScan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_round"
-            android:text="Scan code" />
+            android:text="  Scan code  " />
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.example.qrcode
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
@@ -14,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     private var backPressedTime: Long = 0
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,14 +24,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavigation)
+        bottomNavigation.selectedItemId = R.id.scan
 
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.scan -> {
-                    startFragment(ScanFragment())
+                R.id.generate -> {
+                    startFragment(GenerateFragment())
                     true
                 }
-                R.id.generate -> {
+                R.id.scan -> {
                     startFragment(ScanFragment())
                     true
                 }

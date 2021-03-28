@@ -4,23 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:text="Scan code"
-            android:textColor="@color/white"
-            android:layout_gravity="center" />
-
-    </androidx.appcompat.widget.Toolbar>
-
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -31,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        app:itemIconSize="32dp"
-        android:elevation="1dp"
+        app:itemIconSize="36dp"
+        android:elevation="18dp"
         android:background="@drawable/round"
         app:menu="@menu/navigation"/>
 

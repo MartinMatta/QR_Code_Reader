@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/scan"
+        android:id="@+id/generate"
         android:icon="@drawable/add"/>
 
     <item
-        android:id="@+id/generate"
+        android:id="@+id/scan"
         android:icon="@drawable/scan"/>
 
     <item
