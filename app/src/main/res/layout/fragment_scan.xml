@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ScanFragment"
+    tools:context=".Fragments.ScanFragment"
     tools:ignore="MissingClass">
 
 
@@ -16,20 +16,28 @@
         android:gravity="center">
 
 
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:orientation="vertical"
             android:background="@drawable/image_corner"
-            android:src="@drawable/qrcode"/>
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/qrcode"/>
+
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/buttonScan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/button_round"
             android:text="  Scan code  " />
 
     </LinearLayout>

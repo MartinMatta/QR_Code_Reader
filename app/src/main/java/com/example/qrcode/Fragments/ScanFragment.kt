@@ -1,12 +1,11 @@
-package com.example.qrcode
+package com.example.qrcode.Fragments
 
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.budiyev.android.codescanner.CodeScanner
+import com.example.qrcode.R
 
 class ScanFragment : Fragment() {
 

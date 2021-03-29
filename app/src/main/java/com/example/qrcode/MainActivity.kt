@@ -1,12 +1,14 @@
 package com.example.qrcode
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.qrcode.Fragments.GenerateFragment
+import com.example.qrcode.Fragments.HistoryFragment
+import com.example.qrcode.Fragments.ScanFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.system.exitProcess
 
@@ -17,7 +19,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //theme.applyStyle(R.style.Theme_Scan, true)
+
         setContentView(R.layout.activity_main)
+
 
         if (savedInstanceState == null) {
             startFragment(ScanFragment())
