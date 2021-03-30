@@ -61,7 +61,20 @@ class HistoryFragment : Fragment() {
                 R.mipmap.ic_launcher
             )
         )
-
+        list.add(
+            Model(
+                "0950 886 171",
+                "27/3/2021 pm 12:54",
+                R.mipmap.ic_launcher
+            )
+        )
+        list.add(
+            Model(
+                "0950 886 171",
+                "27/3/2021 pm 12:54",
+                R.mipmap.ic_launcher
+            )
+        )
         listView.adapter = ListAdapter(
             requireActivity(),
             R.layout.row,
