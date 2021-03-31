@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 import com.example.qrcode.ListAdapter
 import com.example.qrcode.Model
+import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 
 class GenerateFragment : Fragment() {
