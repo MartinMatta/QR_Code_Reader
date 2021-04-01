@@ -32,64 +32,23 @@ class HistoryFragment : Fragment() {
 
         val database = QrCodeDatabase(requireContext(), "history")
 
-        database.insertData("0950 886 171")
+        //database.insertData("0950 886 171")
         //database.insertData("Martin Matta")
         //database.insertData("http://google.com")
 
-        list.add(
-            Model(
-                "http://kristianvalčo.eu",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher
+        val data = database.readData()
+
+
+        if (data.isNotEmpty()) {
+            listView.adapter = ListAdapter(
+                requireActivity(),
+                R.layout.row,
+                data
             )
-        )
-        list.add(
-            Model(
-                "http://peterdiag.eu",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher_round
-            )
-        )
-        list.add(
-            Model(
-                "John Doe",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher
-            )
-        )
-        list.add(
-            Model(
-                "Peter Diag",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher_round
-            )
-        )
-        list.add(
-            Model(
-                "0950 886 171",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher
-            )
-        )
-        list.add(
-            Model(
-                "0950 886 171",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher
-            )
-        )
-        list.add(
-            Model(
-                "0950 886 171",
-                "27/3/2021 pm 12:54",
-                R.mipmap.ic_launcher
-            )
-        )
-        listView.adapter = ListAdapter(
-            requireActivity(),
-            R.layout.row,
-            list
-        )
+        }
+
+        listView.emptyView = view.findViewById(R.id.emptyElement);
+        
         return view
     }
 

@@ -63,7 +63,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                 list.add(
                     Model(
                         result.getString(result.getColumnIndex(COL_NAME)),
-                        result.getString(result.getColumnIndex(COL_DATE)),
+                        result.getString(result.getColumnIndex(COL_DATE)), // date
                         R.mipmap.ic_launcher
                     )
                 )
@@ -73,9 +73,17 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         return list
     }
 
+    fun delete(id: Int):Int{
+        val db = this.writableDatabase
+        val success = db.delete(TABLE, "id=$id",null)
+        db.close()
+        return success
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun getDateTime(): String {
         val dateTime = LocalDateTime.now()
-        return dateTime.format(DateTimeFormatter.ofPattern("d/M/y H:m a"))
+        return dateTime.format(DateTimeFormatter.ofPattern("d/M/y HH:mm a"))
     }
 }

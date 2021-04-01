@@ -25,13 +25,16 @@ class GenerateFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+
         val view: View = inflater.inflate(R.layout.fragment_generate, container, false)
         val listView: ListView = view.findViewById(R.id.listView)
 
         //var list = mutableListOf<Model>()
 
         val database = QrCodeDatabase(requireContext(), "history")
+
         val data = database.readData()
+
 
         if (data.isNotEmpty()) {
             listView.adapter = ListAdapter(
@@ -41,13 +44,7 @@ class GenerateFragment : Fragment() {
             )
         }
 
-        //list.add(
-           // Model(
-                //"http://kristianvalčo.eu",
-                //"27/3/2021 pm 12:54",
-                //R.mipmap.ic_launcher
-            //)
-        //)
+        listView.emptyView = view.findViewById(R.id.emptyElement);
 
         return view
     }
