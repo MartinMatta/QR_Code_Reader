@@ -1,13 +1,16 @@
 package com.example.qrcode.Fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import androidx.annotation.RequiresApi
 import com.example.qrcode.ListAdapter
 import com.example.qrcode.Model
+import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 
 class HistoryFragment : Fragment() {
@@ -17,6 +20,7 @@ class HistoryFragment : Fragment() {
         //activity?.title = "History"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -25,6 +29,12 @@ class HistoryFragment : Fragment() {
         val listView: ListView = view.findViewById(R.id.listView)
 
         var list = mutableListOf<Model>()
+
+        val database = QrCodeDatabase(requireContext(), "history")
+
+        database.insertData("0950 886 171")
+        //database.insertData("Martin Matta")
+        //database.insertData("http://google.com")
 
         list.add(
             Model(

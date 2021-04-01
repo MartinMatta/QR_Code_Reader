@@ -27,12 +27,13 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_IMAGE + " TEXT," +  //BLOB
                 COL_NAME + " TEXT," +
-                COL_DATE + " TEXT"
+                COL_DATE + " TEXT)"
         db?.execSQL(createTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE")
+        onCreate(db)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
