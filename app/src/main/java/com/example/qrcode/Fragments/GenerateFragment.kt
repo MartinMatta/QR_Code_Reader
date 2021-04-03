@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.qrcode.ListAdapter
 import com.example.qrcode.Model
@@ -27,12 +29,15 @@ class GenerateFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
 
         val view: View = inflater.inflate(R.layout.fragment_generate, container, false)
+
+        val addButton: ImageButton = view.findViewById(R.id.add_button)
         val listView: ListView = view.findViewById(R.id.listView)
 
-        //var list = mutableListOf<Model>()
+        addButton.setOnClickListener() {
+            Toast.makeText(activity, "Clicked!", Toast.LENGTH_SHORT).show()
+        }
 
         val database = QrCodeDatabase(requireContext(), "history")
-
         val data = database.readData()
 
 
@@ -50,3 +55,4 @@ class GenerateFragment : Fragment() {
     }
 
 }
+

@@ -33,7 +33,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE")
-        onCreate(db)
+        //onCreate(db)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
