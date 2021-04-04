@@ -35,10 +35,12 @@
 
         <Button
             android:id="@+id/buttonScan"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="64dp"
             android:layout_marginTop="16dp"
-            android:text="  Scan code  " />
+            android:text="Scan code" />
 
     </LinearLayout>
 
