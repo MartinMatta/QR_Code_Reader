@@ -1,7 +1,9 @@
 package com.example.qrcode
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         //theme.applyStyle(R.style.Theme_Scan, true)
 
         setContentView(R.layout.activity_main)
+
+        window.statusBarColor = Color.parseColor("#ffffff");
+
 
 
         if (savedInstanceState == null) {
