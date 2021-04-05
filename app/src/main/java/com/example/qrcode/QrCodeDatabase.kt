@@ -17,24 +17,58 @@ const val COL_NAME = "name"
 const val COL_DATE = "date"
 const val COL_ID = "id"
 
+const val TABLE_HISTORY = "history"
+const val TABLE_MY_CODE = "myCode"
+
 
 class QrCodeDatabase(private var context: Context, private val TABLE: String):
     SQLiteOpenHelper(context, DATABASE, null, 1){
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        val createTable = "CREATE TABLE $TABLE (" +
+        val historyTable = "CREATE TABLE $TABLE_HISTORY (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_IMAGE + " TEXT," +  //BLOB
                 COL_NAME + " TEXT," +
                 COL_DATE + " TEXT)"
-        db?.execSQL(createTable)
+
+        val myCodeTable = "CREATE TABLE $TABLE_MY_CODE (" +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COL_IMAGE + " TEXT," +  //BLOB
+                COL_NAME + " TEXT," +
+                COL_DATE + " TEXT)"
+
+        db?.execSQL(historyTable)
+        db?.execSQL(myCodeTable)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS $TABLE")
-        //onCreate(db)
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_HISTORY")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_MY_CODE")
     }
+
+    fun insert(table: String, contentValues: ContentValues) {
+        val database = this.writableDatabase
+        val result = database.insert(table, null, contentValues)
+        if (result == (0).toLong()) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun insertHistory(name: String) {
+        val database = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COL_IMAGE, "image")
+        contentValues.put(COL_NAME, name)
+        contentValues.put(COL_DATE, getDateTime())
+
+        insert(TABLE_HISTORY, contentValues)
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertData(name: String) {
@@ -43,13 +77,8 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         contentValues.put(COL_IMAGE, "image")
         contentValues.put(COL_NAME, name)
         contentValues.put(COL_DATE, getDateTime())
-        val result = database.insert(TABLE, null, contentValues)
-        if (result == (0).toLong()) {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-        }
-        else {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-        }
+
+        insert(TABLE_MY_CODE, contentValues)
     }
 
     fun readData(): ArrayList<Model>{
