@@ -42,7 +42,9 @@ import kotlin.system.exitProcess
         }
 
         val database = QrCodeDatabase(requireContext(), "history")
-        val data = database.readData()
+        val data = database.readMyCode()
+
+        //database.delete(1, database.TABLE_MY_CODE)
 
 
         if (data.isNotEmpty()) {

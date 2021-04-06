@@ -24,6 +24,9 @@ const val TABLE_MY_CODE = "myCode"
 class QrCodeDatabase(private var context: Context, private val TABLE: String):
     SQLiteOpenHelper(context, DATABASE, null, 1){
 
+    val TABLE_HISTORY = "history"
+    val TABLE_MY_CODE = "myCode"
+
     override fun onCreate(db: SQLiteDatabase?) {
 
         val historyTable = "CREATE TABLE $TABLE_HISTORY (" +
@@ -47,7 +50,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_MY_CODE")
     }
 
-    fun insert(table: String, contentValues: ContentValues) {
+    private fun insert(table: String, contentValues: ContentValues) {
         val database = this.writableDatabase
         val result = database.insert(table, null, contentValues)
         if (result == (0).toLong()) {
@@ -71,7 +74,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertData(name: String) {
+    fun insertMyCode(name: String) {
         val database = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COL_IMAGE, "image")
@@ -81,10 +84,10 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         insert(TABLE_MY_CODE, contentValues)
     }
 
-    fun readData(): ArrayList<Model>{
+    fun readMyCode(): ArrayList<Model>{
         val list: ArrayList<Model> = ArrayList()
         val db = this.readableDatabase
-        val query = "Select * from $TABLE"
+        val query = "Select * from $TABLE_MY_CODE"
         val result = db.rawQuery(query, null)
         if (result.moveToFirst()) {
             do {
@@ -102,9 +105,9 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         return list
     }
 
-    fun delete(id: Int):Int{
+    fun delete(id: Int, table: String):Int{
         val db = this.writableDatabase
-        val success = db.delete(TABLE, "id=$id",null)
+        val success = db.delete(table, "id=$id",null)
         db.close()
         return success
     }
