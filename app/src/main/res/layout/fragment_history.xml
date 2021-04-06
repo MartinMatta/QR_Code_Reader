@@ -34,16 +34,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="64dp">
+            android:layout_marginBottom="64dp"
+            android:gravity="center_horizontal">
 
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:textStyle="bold"
                 android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/emptyElement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="List is empty!"
+                android:textColor="#525252"
+                android:textSize="19.0sp"
+                android:visibility="gone" />
 
         </LinearLayout>
 

@@ -41,19 +41,21 @@ import kotlin.system.exitProcess
             addQRCodeDialog()
         }
 
-        val database = QrCodeDatabase(requireContext(), "history")
-        val data = database.readMyCode()
+        val database = QrCodeDatabase(requireContext(), "myCode")
+        val data = database._readMyCode()
+        //database.insertHistory("aas")
+        //val data = database.readMyCode()
 
         //database.delete(1, database.TABLE_MY_CODE)
 
 
-        if (data.isNotEmpty()) {
-            listView.adapter = ListAdapter(
-                requireActivity(),
-                R.layout.row,
-                data
-            )
-        }
+        //if (data.isNotEmpty()) {
+            //listView.adapter = ListAdapter(
+                //requireActivity(),
+                //R.layout.row,
+                //data
+            //)
+        //}
 
         listView.emptyView = view.findViewById(R.id.emptyElement);
 

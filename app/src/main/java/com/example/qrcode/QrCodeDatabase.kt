@@ -63,6 +63,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertHistory(name: String) {
+
         val database = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COL_IMAGE, "image")
@@ -75,6 +76,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertMyCode(name: String) {
+
         val database = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COL_IMAGE, "image")
@@ -102,6 +104,17 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
             }
             while (result.moveToNext())
         }
+        return list
+    }
+
+    fun _readMyCode(): ArrayList<Model>{
+        val list: ArrayList<Model> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from $TABLE_MY_CODE"
+        //val result = db.rawQuery(query, null)
+        val res = db.rawQuery("select * from $TABLE_MY_CODE", null)
+        //result.moveToFirst()
+        //result.close()
         return list
     }
 
