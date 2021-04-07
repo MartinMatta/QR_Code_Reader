@@ -118,6 +118,17 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         return list
     }
 
+    fun readHistory(): ArrayList<Model>{
+        val list: ArrayList<Model> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from $TABLE_HISTORY"
+        //val result = db.rawQuery(query, null)
+        val res = db.rawQuery("select * from $TABLE_MY_CODE", null)
+        //result.moveToFirst()
+        //result.close()
+        return list
+    }
+
     fun delete(id: Int, table: String):Int{
         val db = this.writableDatabase
         val success = db.delete(table, "id=$id",null)
