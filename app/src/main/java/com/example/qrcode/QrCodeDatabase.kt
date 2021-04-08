@@ -2,6 +2,7 @@ package com.example.qrcode
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build
@@ -121,11 +122,30 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
     fun readHistory(): ArrayList<Model>{
         val list: ArrayList<Model> = ArrayList()
         val db = this.readableDatabase
-        val query = "Select * from $TABLE_HISTORY"
-        //val result = db.rawQuery(query, null)
-        val res = db.rawQuery("select * from $TABLE_MY_CODE", null)
-        //result.moveToFirst()
-        //result.close()
+
+        val cursor: Cursor = readableDatabase.query(
+                TABLE_HISTORY,
+                arrayOf(COL_ID, COL_IMAGE, COL_NAME, COL_DATE),
+                null, null, null, null, null
+        )
+
+        cursor.use { cursor ->
+            if (cursor.count != 0) {
+                cursor.moveToFirst()
+                if (cursor.count > 0) {
+                    do {
+                        val id : Int = cursor.getInt(cursor.getColumnIndex(COL_ID))
+                        val image: String = cursor.getString(cursor.getColumnIndex(COL_IMAGE))
+                        val name: String = cursor.getString(cursor.getColumnIndex(COL_NAME))
+                        val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
+
+                        list.add(Model(name, date, R.mipmap.ic_launcher)
+                        )
+                    } while ((cursor.moveToNext()))
+                }
+            }
+        }
+
         return list
     }
 
