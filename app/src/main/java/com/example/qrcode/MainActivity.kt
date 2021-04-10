@@ -55,33 +55,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            return
-        } else {
-            exitDialog()
-        }
-        backPressedTime = System.currentTimeMillis()
-    }
-
-    private fun exitDialog() {
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.exit_dialog, null)
-        val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-
-        val btnCancel = mDialogView.findViewById<Button>(R.id.btnCancel)
-        val btnOk = mDialogView.findViewById<Button>(R.id.btnOk)
-
-        val  mAlertDialog = mBuilder.show()
-
-        btnCancel.setOnClickListener {
-            mAlertDialog.dismiss()
-        }
-
-        btnOk.setOnClickListener {
-            exitProcess(1)
-        }
-    }
 
     private fun startFragment(fragment: Fragment) {
         supportFragmentManager
