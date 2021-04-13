@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#fbfbfb"
     tools:context=".Fragments.addQRCodeFragment">
 
 
@@ -41,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:textSize="26dp"
                 android:textStyle="bold"
@@ -57,30 +58,58 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="64dp"
-                android:gravity="center_horizontal">
+                android:orientation="vertical"
+                android:layout_height="match_parent">
 
                 <Spinner
                     android:id="@+id/spinner"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="?attr/dropdownListPreferredItemHeight"
-                    android:layout_margin="10dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:dropDownWidth="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="12dp"
                     android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
-                    android:paddingRight="14dp"
-                    android:popupBackground="@android:color/white"
-                    android:popupElevation="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:background="@drawable/round_text"
+                    android:popupBackground="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="1dp"
+                    android:inputType="textMultiLine"
+                    android:hint="text"
+                    android:lines="6"
+                    android:padding="8dp"
+                    android:background="@drawable/round_text"
+                    android:gravity="top|left"
+                    android:scrollbars="vertical" />
+
+                <Button
+                    android:id="@+id/buttonScan"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_text"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:text="Save" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/qrcode"/>
 
 
             </LinearLayout>
+
+
 
         </ScrollView>
 
