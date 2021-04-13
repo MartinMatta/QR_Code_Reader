@@ -3,4 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exit_text">Are you sure want to exit ?</string>
+
+    <string-array name="birds">
+        <item>tel number</item>
+        <item>email</item>
+        <item>text</item>
+        <item>contact</item>
+        <item>product</item>
+        <item>url</item>
+        <item>gps</item>
+    </string-array>
 </resources>

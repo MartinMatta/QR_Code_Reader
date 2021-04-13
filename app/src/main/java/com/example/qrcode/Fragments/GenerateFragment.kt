@@ -38,11 +38,14 @@ import kotlin.system.exitProcess
 
         addButton.setOnClickListener() {
             //Toast.makeText(activity, "Clicked!", Toast.LENGTH_SHORT).show()
-            addQRCodeDialog()
+            val fragment = addQRCodeFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame, fragment)
+                    ?.commit();
         }
 
         val database = QrCodeDatabase(requireContext(), "myCode")
-        val data = database._readMyCode()
+        //val data = database._readMyCode()
         //database.insertHistory("aas")
         //val data = database.readMyCode()
 
@@ -61,25 +64,5 @@ import kotlin.system.exitProcess
 
         return view
     }
-
-    private fun addQRCodeDialog() {
-        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.add_qrcode_dialog, null)
-        val mBuilder = AlertDialog.Builder(requireContext())
-            .setView(mDialogView)
-
-        //val btnCancel = mDialogView.findViewById<Button>(R.id.btnCancel)
-        //val btnOk = mDialogView.findViewById<Button>(R.id.btnOk)
-
-        val  mAlertDialog = mBuilder.show()
-
-        //btnCancel.setOnClickListener {
-            //mAlertDialog.dismiss()
-        //}
-
-        //btnOk.setOnClickListener {
-            //exitProcess(1)
-        //}
-    }
-
 }
 
