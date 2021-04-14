@@ -28,7 +28,7 @@ class addQRCodeFragment : Fragment() {
                 android.R.layout.simple_spinner_item
         )
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter.setDropDownViewResource(R.layout.spinner_row)
         spinner.adapter = adapter
 
         return view
