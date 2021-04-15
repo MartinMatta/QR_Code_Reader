@@ -89,13 +89,22 @@
                     android:scrollbars="vertical" />
 
                 <Button
-                    android:id="@+id/buttonScan"
+                    android:id="@+id/buttonSave"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_text"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
                     android:text="Save" />
+
+                <Button
+                    android:id="@+id/buttonShare"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_text"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:text="Share" />
 
                 <ImageView
                     android:id="@+id/imageView2"
