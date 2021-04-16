@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
+import android.widget.ListView
 import android.widget.Spinner
 import com.example.qrcode.R
 
@@ -21,6 +23,24 @@ class addQRCodeFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_add_qr_code, container, false)
 
         val spinner: Spinner = view.findViewById(R.id.spinner)
+
+        val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
+        val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
+
+
+        saveButton.setOnClickListener() {
+            val fragment = addQRCodeFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame, fragment)
+                    ?.commit();
+        }
+
+        shareButton.setOnClickListener() {
+            val fragment = addQRCodeFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame, fragment)
+                    ?.commit();
+        }
 
         val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
