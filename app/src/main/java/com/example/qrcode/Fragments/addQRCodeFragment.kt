@@ -29,17 +29,11 @@ class addQRCodeFragment : Fragment() {
 
 
         saveButton.setOnClickListener() {
-            val fragment = addQRCodeFragment()
-            activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.frame, fragment)
-                    ?.commit();
+
         }
 
         shareButton.setOnClickListener() {
-            val fragment = addQRCodeFragment()
-            activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.frame, fragment)
-                    ?.commit();
+
         }
 
         val adapter = ArrayAdapter.createFromResource(
