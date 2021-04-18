@@ -28,20 +28,17 @@ class HistoryFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_history, container, false)
         val listView: ListView = view.findViewById(R.id.listView)
 
-        var list = mutableListOf<Model>()
-
         val database = QrCodeDatabase(requireContext(), "history")
 
-        //val data = database.readMyCode()
+        val data = database.readHistory()
 
-
-        //if (data.isNotEmpty()) {
-            //listView.adapter = ListAdapter(
-                //requireActivity(),
-               // R.layout.row,
-                //data
-           // )
-        //}
+        if (data.isNotEmpty()) {
+            listView.adapter = ListAdapter(
+                requireActivity(),
+                R.layout.row,
+                data
+            )
+        }
 
         listView.emptyView = view.findViewById(R.id.emptyElement);
         

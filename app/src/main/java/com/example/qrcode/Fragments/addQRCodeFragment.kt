@@ -2,17 +2,16 @@ package com.example.qrcode.Fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
 import androidx.fragment.app.Fragment
+import com.example.qrcode.MainActivity
 import com.example.qrcode.R
 import com.google.zxing.WriterException
 
@@ -41,7 +40,6 @@ class addQRCodeFragment : Fragment() {
         //val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
         //val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
 
-
         //saveButton.setOnClickListener() {
         //}
 
@@ -56,31 +54,43 @@ class addQRCodeFragment : Fragment() {
 
         //adapter.setDropDownViewResource(R.layout.spinner_row)
         qrSpinner!!.adapter = adapter
-        //qrSpinner.adapter = adapter
 
         return view
     }
 
     fun generateQRCode() {
 
-        var type = qrSpinner?.selectedItem?.toString()
+        var text: String = qrText?.text.toString()
 
-        when (type) {
-            "text" -> type =  QRGContents.Type.TEXT
-            "contact" -> type =  QRGContents.Type.CONTACT
-            "sms" -> type =  QRGContents.Type.SMS
-            "phone" -> type =  QRGContents.Type.PHONE
-            "location" -> type =  QRGContents.Type.LOCATION
-            "email" -> type =  QRGContents.Type.EMAIL
-            else -> print("otherwise")
-        }
-        qrgEncoder = QRGEncoder(qrText?.text.toString(), null, type, 5)
+        if (TextUtils.isEmpty(text)) {
+            Toast.makeText(requireContext(),
+                    "Enter some text to generate QR Code",
+                    Toast.LENGTH_SHORT).show();
+        } else {
 
-        try {
-            bitmap = qrgEncoder!!.encodeAsBitmap()
-            qrImage?.setImageBitmap(bitmap)
-        } catch (e: WriterException) {
-            Log.e("Tag", e.toString())
+            var type = qrSpinner?.selectedItem?.toString()
+
+            when (type) {
+                "text" -> type =  QRGContents.Type.TEXT
+                "contact" -> type =  QRGContents.Type.CONTACT
+                "sms" -> type =  QRGContents.Type.SMS
+                "phone" -> type =  QRGContents.Type.PHONE
+                "location" -> type =  QRGContents.Type.LOCATION
+                "email" -> type =  QRGContents.Type.EMAIL
+                else -> print("otherwise")
+            }
+
+            qrgEncoder = QRGEncoder(qrText?.text.toString(), null, type, 5)
+
+            try {
+                bitmap = qrgEncoder!!.encodeAsBitmap()
+                qrImage?.setImageBitmap(bitmap)
+            } catch (e: WriterException) {
+                Log.e("Tag", e.toString())
+            }
+
         }
+
     }
 }
+
