@@ -21,6 +21,7 @@ class addQRCodeFragment : Fragment() {
 
     private var bitmap: Bitmap? = null
     private var qrgEncoder: QRGEncoder? = null
+    private var qrSpinner: Spinner? = null
     private var qrText: EditText? = null
     private var qrImage: ImageView? = null
 
@@ -33,7 +34,7 @@ class addQRCodeFragment : Fragment() {
 
         val view =  inflater.inflate(R.layout.fragment_add_qr_code, container, false)
 
-        val spinner: Spinner = view.findViewById(R.id.spinner)
+        qrSpinner = view.findViewById(R.id.qrSpinner)
         qrText = view.findViewById(R.id.qrText)
         qrImage = view.findViewById(R.id.qrImage)
 
@@ -54,14 +55,15 @@ class addQRCodeFragment : Fragment() {
         )
 
         //adapter.setDropDownViewResource(R.layout.spinner_row)
-        spinner.adapter = adapter
+        qrSpinner!!.adapter = adapter
+        //qrSpinner.adapter = adapter
 
         return view
     }
 
     fun generateQRCode() {
 
-        var type = "text"
+        var type = qrSpinner?.selectedItem?.toString()
 
         when (type) {
             "text" -> type =  QRGContents.Type.TEXT
