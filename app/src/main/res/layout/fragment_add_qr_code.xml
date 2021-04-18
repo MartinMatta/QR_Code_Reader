@@ -75,6 +75,7 @@
                     android:popupBackground="@drawable/round_text"/>
 
                 <EditText
+                    android:id="@+id/qrText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -107,7 +108,7 @@
                     android:text="Share" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/qrImage"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="12dp"
