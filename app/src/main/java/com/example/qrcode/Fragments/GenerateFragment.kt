@@ -37,7 +37,6 @@ import kotlin.system.exitProcess
         val listView: ListView = view.findViewById(R.id.listView)
 
         addButton.setOnClickListener() {
-            //Toast.makeText(activity, "Clicked!", Toast.LENGTH_SHORT).show()
             val fragment = addQRCodeFragment()
             activity?.supportFragmentManager?.beginTransaction()
                     ?.replace(R.id.frame, fragment)

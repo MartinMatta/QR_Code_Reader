@@ -72,7 +72,7 @@
                     android:layout_marginBottom="12dp"
                     android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
                     android:background="@drawable/round_text"
-                    android:popupBackground="@android:color/white"/>
+                    android:popupBackground="@drawable/round_text"/>
 
                 <EditText
                     android:layout_width="match_parent"

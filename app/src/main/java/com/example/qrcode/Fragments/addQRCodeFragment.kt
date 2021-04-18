@@ -24,17 +24,15 @@ class addQRCodeFragment : Fragment() {
 
         val spinner: Spinner = view.findViewById(R.id.spinner)
 
-        val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
-        val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
+        //val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
+        //val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
 
 
-        saveButton.setOnClickListener() {
+        //saveButton.setOnClickListener() {
+        //}
 
-        }
-
-        shareButton.setOnClickListener() {
-
-        }
+        //shareButton.setOnClickListener() {
+        //}
 
         val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
@@ -42,7 +40,7 @@ class addQRCodeFragment : Fragment() {
                 android.R.layout.simple_spinner_item
         )
 
-        adapter.setDropDownViewResource(R.layout.spinner_row)
+        //adapter.setDropDownViewResource(R.layout.spinner_row)
         spinner.adapter = adapter
 
         return view
