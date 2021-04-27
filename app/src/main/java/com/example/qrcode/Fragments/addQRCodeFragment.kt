@@ -37,8 +37,8 @@ class addQRCodeFragment : Fragment() {
         qrText = view.findViewById(R.id.qrText)
         qrImage = view.findViewById(R.id.qrImage)
 
-        //val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
-        //val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
+        val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
+        val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
 
         //saveButton.setOnClickListener() {
         //}
