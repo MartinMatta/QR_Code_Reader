@@ -40,11 +40,11 @@ class addQRCodeFragment : Fragment() {
         val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
         val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
 
-        //saveButton.setOnClickListener() {
-        //}
+        saveButton.setOnClickListener() {
+        }
 
-        //shareButton.setOnClickListener() {
-        //}
+        shareButton.setOnClickListener() {
+        }
 
         val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
