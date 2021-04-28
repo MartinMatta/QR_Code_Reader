@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="32dp"
-        app:maskColor="@color/black"
+        app:maskColor="#408D918D"
      />
 
 </FrameLayout>
