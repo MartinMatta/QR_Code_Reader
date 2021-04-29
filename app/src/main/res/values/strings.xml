@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exit_text">Are you sure want to exit ?</string>
+    <string name="scan_button_text">Scan</string>
 
     <string-array name="birds">
         <item>tel number</item>
