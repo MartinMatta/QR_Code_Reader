@@ -1,15 +1,20 @@
 package com.example.qrcode.Fragments
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.qrcode.MainActivity
 import com.example.qrcode.R
@@ -37,18 +42,39 @@ class addQRCodeFragment : Fragment() {
         qrText = view.findViewById(R.id.qrText)
         qrImage = view.findViewById(R.id.qrImage)
 
-        val saveButton: ImageButton = view.findViewById(R.id.buttonSave)
-        val shareButton: ImageButton = view.findViewById(R.id.buttonShare)
+        val saveButton: Button = view.findViewById(R.id.buttonSave)
+        val shareButton: Button = view.findViewById(R.id.buttonShare)
+
+        qrText?.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (event.action == KeyEvent.ACTION_DOWN &&
+                        keyCode == KeyEvent.KEYCODE_ENTER
+                ) {
+                    generateQRCode()
+                    view.hideKeyboard()
+
+
+                    return true
+                }
+                return false
+            }
+        })
 
         saveButton.setOnClickListener() {
+            Toast.makeText(requireContext(),
+                    "save",
+                    Toast.LENGTH_SHORT).show();
         }
 
         shareButton.setOnClickListener() {
+            Toast.makeText(requireContext(),
+                    "share",
+                    Toast.LENGTH_SHORT).show();
         }
 
         val adapter = ArrayAdapter.createFromResource(
                 requireContext(),
-                R.array.birds,
+                R.array.generate_menu,
                 android.R.layout.simple_spinner_item
         )
 
@@ -80,7 +106,7 @@ class addQRCodeFragment : Fragment() {
                 else -> print("otherwise")
             }
 
-            qrgEncoder = QRGEncoder(qrText?.text.toString(), null, type, 5)
+            qrgEncoder = QRGEncoder(qrText?.text.toString(), null, type, 3)
 
             try {
                 bitmap = qrgEncoder!!.encodeAsBitmap()
@@ -91,6 +117,11 @@ class addQRCodeFragment : Fragment() {
 
         }
 
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }
 

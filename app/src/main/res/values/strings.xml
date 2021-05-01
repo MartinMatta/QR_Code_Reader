@@ -6,12 +6,10 @@
     <string name="scan_button_text">Scan</string>
 
     <string-array name="generate_menu">
-        <item>tel number</item>
-        <item>email</item>
         <item>text</item>
         <item>contact</item>
-        <item>product</item>
-        <item>url</item>
-        <item>gps</item>
+        <item>sms</item>
+        <item>location</item>
+        <item>email</item>
     </string-array>
 </resources>
