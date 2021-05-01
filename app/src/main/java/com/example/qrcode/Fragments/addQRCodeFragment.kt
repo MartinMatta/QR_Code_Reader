@@ -61,15 +61,9 @@ class addQRCodeFragment : Fragment() {
         })
 
         saveButton.setOnClickListener() {
-            Toast.makeText(requireContext(),
-                    "save",
-                    Toast.LENGTH_SHORT).show();
         }
 
         shareButton.setOnClickListener() {
-            Toast.makeText(requireContext(),
-                    "share",
-                    Toast.LENGTH_SHORT).show();
         }
 
         val adapter = ArrayAdapter.createFromResource(
