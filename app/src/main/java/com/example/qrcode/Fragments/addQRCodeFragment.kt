@@ -50,9 +50,8 @@ class addQRCodeFragment : Fragment() {
                 if (event.action == KeyEvent.ACTION_DOWN &&
                         keyCode == KeyEvent.KEYCODE_ENTER
                 ) {
-                    generateQRCode()
                     view.hideKeyboard()
-
+                    generateQRCode()
 
                     return true
                 }
