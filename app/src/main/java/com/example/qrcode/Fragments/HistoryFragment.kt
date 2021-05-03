@@ -29,6 +29,7 @@ class HistoryFragment : Fragment() {
         val listView: ListView = view.findViewById(R.id.listView)
 
         val database = QrCodeDatabase(requireContext(), "history")
+        database.insertHistory("test h 1")
 
         val data = database.readHistory()
 

@@ -87,44 +87,43 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         insert(TABLE_MY_CODE, contentValues)
     }
 
-    fun readMyCode(): ArrayList<Model>{
-        val list: ArrayList<Model> = ArrayList()
-        val db = this.readableDatabase
-        val query = "Select * from $TABLE_MY_CODE"
-        val result = db.rawQuery(query, null)
-        if (result.moveToFirst()) {
-            do {
-
-                list.add(
-                    Model(
-                        result.getString(result.getColumnIndex(COL_NAME)),
-                        result.getString(result.getColumnIndex(COL_DATE)), // date
-                        R.mipmap.ic_launcher
-                    )
-                )
-            }
-            while (result.moveToNext())
-        }
-        return list
-    }
-
-    fun _readMyCode(): ArrayList<Model>{
-        val list: ArrayList<Model> = ArrayList()
-        val db = this.readableDatabase
-        val query = "Select * from $TABLE_MY_CODE"
-        //val result = db.rawQuery(query, null)
-        val res = db.rawQuery("select * from $TABLE_MY_CODE", null)
-        //result.moveToFirst()
-        //result.close()
-        return list
-    }
-
     fun readHistory(): ArrayList<Model>{
         val list: ArrayList<Model> = ArrayList()
         val db = this.readableDatabase
 
         val cursor: Cursor = readableDatabase.query(
                 TABLE_HISTORY,
+                arrayOf(COL_ID, COL_IMAGE, COL_NAME, COL_DATE),
+                null, null, null, null, null
+        )
+
+        cursor.use { cursor ->
+            if (cursor.count != 0) {
+                cursor.moveToFirst()
+                if (cursor.count > 0) {
+                    do {
+                        val id : Int = cursor.getInt(cursor.getColumnIndex(COL_ID))
+                        val image: String = cursor.getString(cursor.getColumnIndex(COL_IMAGE))
+                        val name: String = cursor.getString(cursor.getColumnIndex(COL_NAME))
+                        val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
+
+                        list.add(Model(name, date, R.mipmap.ic_launcher)
+                        )
+                    } while ((cursor.moveToNext()))
+                }
+            }
+        }
+
+        return list
+    }
+
+
+    fun readMyCode(): ArrayList<Model>{
+        val list: ArrayList<Model> = ArrayList()
+        val db = this.readableDatabase
+
+        val cursor: Cursor = readableDatabase.query(
+                TABLE_MY_CODE,
                 arrayOf(COL_ID, COL_IMAGE, COL_NAME, COL_DATE),
                 null, null, null, null, null
         )
