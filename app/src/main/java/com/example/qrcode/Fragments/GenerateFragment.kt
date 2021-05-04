@@ -44,7 +44,6 @@ import kotlin.system.exitProcess
         }
 
         val database = QrCodeDatabase(requireContext(), "myCode")
-        database.insertMyCode("test m 1")
 
         val data = database.readMyCode()
 

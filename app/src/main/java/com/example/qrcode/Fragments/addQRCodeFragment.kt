@@ -52,7 +52,6 @@ class addQRCodeFragment : Fragment() {
                 ) {
                     view.hideKeyboard()
                     generateQRCode()
-
                     return true
                 }
                 return false
