@@ -36,7 +36,7 @@ class HistoryFragment : Fragment() {
             listView.adapter = ListAdapter(
                 requireActivity(),
                 R.layout.row,
-                data
+                data.asReversed()
             )
         }
 

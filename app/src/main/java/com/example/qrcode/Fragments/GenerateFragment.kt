@@ -51,7 +51,7 @@ import kotlin.system.exitProcess
             listView.adapter = ListAdapter(
                     requireActivity(),
                     R.layout.row,
-                    data
+                    data.asReversed()
             )
         }
 
