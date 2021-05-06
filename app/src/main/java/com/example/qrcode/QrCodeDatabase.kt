@@ -32,13 +32,13 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
         val historyTable = "CREATE TABLE $TABLE_HISTORY (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COL_IMAGE + " TEXT," +  //BLOB
+                COL_IMAGE + " BLOB," +  //BLOB
                 COL_NAME + " TEXT," +
                 COL_DATE + " TEXT)"
 
         val myCodeTable = "CREATE TABLE $TABLE_MY_CODE (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COL_IMAGE + " TEXT," +  //BLOB
+                COL_IMAGE + " BLOB," +  //BLOB
                 COL_NAME + " TEXT," +
                 COL_DATE + " TEXT)"
 
@@ -63,7 +63,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertHistory(name: String) {
+    fun insertHistory(name: String, image: Byte) {
 
         val database = this.writableDatabase
         val contentValues = ContentValues()
@@ -87,7 +87,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         insert(TABLE_MY_CODE, contentValues)
     }
 
-    fun readHistory(): ArrayList<Model>{
+    fun readHistory(): MutableList<Model> {
         val list: ArrayList<Model> = ArrayList()
         val db = this.readableDatabase
 
@@ -114,11 +114,11 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
             }
         }
 
-        return list
+        return list.asReversed()
     }
 
 
-    fun readMyCode(): ArrayList<Model>{
+    fun readMyCode(): MutableList<Model> {//ArrayList<Model>{
         val list: ArrayList<Model> = ArrayList()
         val db = this.readableDatabase
 
@@ -145,10 +145,10 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
             }
         }
 
-        return list
+        return list.asReversed()
     }
 
-    fun delete(id: Int, table: String):Int{
+    fun delete(id: Int, table: String) :Int{
         val db = this.writableDatabase
         val success = db.delete(table, "id=$id",null)
         db.close()
