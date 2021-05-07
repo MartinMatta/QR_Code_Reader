@@ -127,7 +127,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
     }
 
 
-    fun readMyCode(): MutableList<Model> {//ArrayList<Model>{
+    fun readMyCode(context: Context): MutableList<Model> {//ArrayList<Model>{
         val list: ArrayList<Model> = ArrayList()
         val db = this.readableDatabase
 
@@ -147,7 +147,9 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                         val type: String = cursor.getString(cursor.getColumnIndex(COL_TYPE))
                         val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
 
-                        list.add(Model(name, date, R.mipmap.ic_launcher)
+                        var bitmap: Bitmap = generateQRCode(context, name, type)
+
+                        list.add(Model(name, date, bitmap)//R.mipmap.ic_launcher
                         )
                     } while ((cursor.moveToNext()))
                 }

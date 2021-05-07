@@ -45,7 +45,7 @@ import kotlin.system.exitProcess
 
         val database = QrCodeDatabase(requireContext(), "myCode")
 
-        val data = database.readMyCode()
+        val data = database.readMyCode(requireContext())
 
         if (data.isNotEmpty()) {
             listView.adapter = ListAdapter(
