@@ -147,9 +147,8 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                         val type: String = cursor.getString(cursor.getColumnIndex(COL_TYPE))
                         val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
 
-                        var bitmap: Bitmap = generateQRCode(context, name, type)
 
-                        list.add(Model(name, date, bitmap)//R.mipmap.ic_launcher
+                        list.add(Model(name, date, R.mipmap.ic_launcher)
                         )
                     } while ((cursor.moveToNext()))
                 }
