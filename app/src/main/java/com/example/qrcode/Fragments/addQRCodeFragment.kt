@@ -2,6 +2,7 @@ package com.example.qrcode.Fragments
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -14,16 +15,17 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.qrcode.MainActivity
+import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 import com.google.zxing.WriterException
 
 
 class addQRCodeFragment : Fragment() {
 
-    private var bitmap: Bitmap? = null
     private var qrgEncoder: QRGEncoder? = null
     private var qrSpinner: Spinner? = null
     private var qrText: EditText? = null
@@ -33,6 +35,7 @@ class addQRCodeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -45,13 +48,23 @@ class addQRCodeFragment : Fragment() {
         val saveButton: Button = view.findViewById(R.id.buttonSave)
         val shareButton: Button = view.findViewById(R.id.buttonShare)
 
+        val database = QrCodeDatabase(requireContext(), "history")
+
         qrText?.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action == KeyEvent.ACTION_DOWN &&
                         keyCode == KeyEvent.KEYCODE_ENTER
                 ) {
                     view.hideKeyboard()
-                    generateQRCode()
+
+                    var type = qrSpinner!!.selectedItem.toString()
+
+                    val bitmap = database.generateQRCode(
+                        requireContext(),
+                        qrText!!.text.toString(),
+                        type
+                    )
+                    qrImage?.setImageBitmap(bitmap)
                     return true
                 }
                 return false
@@ -59,6 +72,7 @@ class addQRCodeFragment : Fragment() {
         })
 
         saveButton.setOnClickListener() {
+            database.insertMyCode(qrText!!.text.toString(), qrSpinner!!.selectedItem.toString())
         }
 
         shareButton.setOnClickListener() {
@@ -76,40 +90,6 @@ class addQRCodeFragment : Fragment() {
         return view
     }
 
-    fun generateQRCode() {
-
-        var text: String = qrText?.text.toString()
-
-        if (TextUtils.isEmpty(text)) {
-            Toast.makeText(requireContext(),
-                    "Enter some text to generate QR Code",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-
-            var type = qrSpinner?.selectedItem?.toString()
-
-            when (type) {
-                "text" -> type =  QRGContents.Type.TEXT
-                "contact" -> type =  QRGContents.Type.CONTACT
-                "sms" -> type =  QRGContents.Type.SMS
-                "phone" -> type =  QRGContents.Type.PHONE
-                "location" -> type =  QRGContents.Type.LOCATION
-                "email" -> type =  QRGContents.Type.EMAIL
-                else -> print("otherwise")
-            }
-
-            qrgEncoder = QRGEncoder(qrText?.text.toString(), null, type, 3)
-
-            try {
-                bitmap = qrgEncoder!!.encodeAsBitmap()
-                qrImage?.setImageBitmap(bitmap)
-            } catch (e: WriterException) {
-                Log.e("Tag", e.toString())
-            }
-
-        }
-
-    }
 
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

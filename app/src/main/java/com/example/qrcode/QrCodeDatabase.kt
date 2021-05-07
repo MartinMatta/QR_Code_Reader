@@ -5,16 +5,22 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.graphics.Bitmap
 import android.os.Build
+import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
 import androidx.annotation.RequiresApi
+import com.google.zxing.WriterException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
 const val DATABASE = "Database"
-const val COL_IMAGE = "image"
-const val COL_NAME = "name"
+const val COL_NAME = "image"
+const val COL_TYPE = "name"
 const val COL_DATE = "date"
 const val COL_ID = "id"
 
@@ -25,6 +31,9 @@ const val TABLE_MY_CODE = "myCode"
 class QrCodeDatabase(private var context: Context, private val TABLE: String):
     SQLiteOpenHelper(context, DATABASE, null, 1){
 
+    private var bitmap: Bitmap? = null
+    private var qrgEncoder: QRGEncoder? = null
+
     val TABLE_HISTORY = "history"
     val TABLE_MY_CODE = "myCode"
 
@@ -32,14 +41,14 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
         val historyTable = "CREATE TABLE $TABLE_HISTORY (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COL_IMAGE + " BLOB," +  //BLOB
-                COL_NAME + " TEXT," +
+                COL_NAME + " TEXT," +  //BLOB
+                COL_TYPE + " TEXT," +
                 COL_DATE + " TEXT)"
 
         val myCodeTable = "CREATE TABLE $TABLE_MY_CODE (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COL_IMAGE + " BLOB," +  //BLOB
-                COL_NAME + " TEXT," +
+                COL_NAME + " TEXT," +  //BLOB
+                COL_TYPE + " TEXT," +
                 COL_DATE + " TEXT)"
 
         db?.execSQL(historyTable)
@@ -63,12 +72,12 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertHistory(name: String, image: Byte) {
+    fun insertHistory(name: String, type: String) {
 
         val database = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(COL_IMAGE, "image")
         contentValues.put(COL_NAME, name)
+        contentValues.put(COL_TYPE, type)
         contentValues.put(COL_DATE, getDateTime())
 
         insert(TABLE_HISTORY, contentValues)
@@ -76,12 +85,12 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertMyCode(name: String) {
+    fun insertMyCode(name: String, type: String) {
 
         val database = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(COL_IMAGE, "image")
         contentValues.put(COL_NAME, name)
+        contentValues.put(COL_TYPE, type)
         contentValues.put(COL_DATE, getDateTime())
 
         insert(TABLE_MY_CODE, contentValues)
@@ -93,7 +102,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
         val cursor: Cursor = readableDatabase.query(
                 TABLE_HISTORY,
-                arrayOf(COL_ID, COL_IMAGE, COL_NAME, COL_DATE),
+                arrayOf(COL_ID, COL_NAME, COL_TYPE, COL_DATE),
                 null, null, null, null, null
         )
 
@@ -103,8 +112,8 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                 if (cursor.count > 0) {
                     do {
                         val id : Int = cursor.getInt(cursor.getColumnIndex(COL_ID))
-                        val image: String = cursor.getString(cursor.getColumnIndex(COL_IMAGE))
                         val name: String = cursor.getString(cursor.getColumnIndex(COL_NAME))
+                        val type: String = cursor.getString(cursor.getColumnIndex(COL_TYPE))
                         val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
 
                         list.add(Model(name, date, R.mipmap.ic_launcher)
@@ -124,7 +133,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
 
         val cursor: Cursor = readableDatabase.query(
                 TABLE_MY_CODE,
-                arrayOf(COL_ID, COL_IMAGE, COL_NAME, COL_DATE),
+                arrayOf(COL_ID, COL_NAME, COL_TYPE, COL_DATE),
                 null, null, null, null, null
         )
 
@@ -134,8 +143,8 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                 if (cursor.count > 0) {
                     do {
                         val id : Int = cursor.getInt(cursor.getColumnIndex(COL_ID))
-                        val image: String = cursor.getString(cursor.getColumnIndex(COL_IMAGE))
                         val name: String = cursor.getString(cursor.getColumnIndex(COL_NAME))
+                        val type: String = cursor.getString(cursor.getColumnIndex(COL_TYPE))
                         val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
 
                         list.add(Model(name, date, R.mipmap.ic_launcher)
@@ -160,5 +169,38 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
     fun getDateTime(): String {
         val dateTime = LocalDateTime.now()
         return dateTime.format(DateTimeFormatter.ofPattern("d/M/y HH:mm a"))
+    }
+
+    fun generateQRCode(context: Context, name: String, type: String): Bitmap? {
+
+        var _type = "text"
+
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(context,
+                "Enter some text to generate QR Code",
+                Toast.LENGTH_SHORT).show();
+        } else {
+
+            when (type) {
+                "text" -> _type =  QRGContents.Type.TEXT
+                "contact" -> _type =  QRGContents.Type.CONTACT
+                "sms" -> _type =  QRGContents.Type.SMS
+                "phone" -> _type =  QRGContents.Type.PHONE
+                "location" -> _type =  QRGContents.Type.LOCATION
+                "email" -> _type =  QRGContents.Type.EMAIL
+                else -> print("otherwise")
+            }
+
+            qrgEncoder = QRGEncoder(name, null, _type, 3)
+
+            try {
+                bitmap = qrgEncoder!!.encodeAsBitmap()
+                //qrImage?.setImageBitmap(bitmap)
+            } catch (e: WriterException) {
+                Log.e("Tag", e.toString())
+            }
+
+        }
+        return bitmap
     }
 }
