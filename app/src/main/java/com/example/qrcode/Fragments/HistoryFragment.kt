@@ -33,13 +33,13 @@ class HistoryFragment : Fragment() {
 
         val data = database.readHistory()
 
-        //if (data.isNotEmpty()) {
-            //listView.adapter = ListAdapter(
-                //requireActivity(),
-                //R.layout.row,
-               // data
-            //)
-        //}
+        if (data.isNotEmpty()) {
+            listView.adapter = ListAdapter(
+                requireActivity(),
+                R.layout.row,
+                data
+            )
+        }
 
         listView.emptyView = view.findViewById(R.id.emptyElement);
         
