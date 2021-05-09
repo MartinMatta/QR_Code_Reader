@@ -33,13 +33,4 @@ class ScanCodeFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        codeScanner.startPreview()
-        super.onResume()
-    }
-
-    override fun onPause() {
-        codeScanner.releaseResources()
-        super.onPause()
-    }
 }
