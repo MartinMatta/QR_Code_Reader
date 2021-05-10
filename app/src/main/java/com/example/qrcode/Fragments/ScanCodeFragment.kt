@@ -2,22 +2,37 @@ package com.example.qrcode.Fragments
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 import com.example.qrcode.R
+import com.example.qrcode.Utils
 
 class ScanCodeFragment : Fragment() {
     private lateinit var codeScanner: CodeScanner
+    val utils = Utils()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                123)
+        }
+
         return inflater.inflate(R.layout.fragment_scan_code, container, false)
     }
 
@@ -34,7 +49,14 @@ class ScanCodeFragment : Fragment() {
 
         codeScanner.decodeCallback = DecodeCallback {
             activity.runOnUiThread {
-                Toast.makeText(requireContext(), "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
+                var url = "martinmatta355@gmail.com"
+                Toast.makeText(requireContext(), utils.getQrCodeType(url), Toast.LENGTH_LONG).show()
+                ///if (!url.isValidUrl()) {
+                    //Toast.makeText(requireContext(), "no url", Toast.LENGTH_LONG).show()
+                //}else{
+                    //Toast.makeText(requireContext(), "url", Toast.LENGTH_LONG).show()
+                //}
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -61,5 +83,7 @@ class ScanCodeFragment : Fragment() {
         }
         super.onPause()
     }
+
+    fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
 
 }
