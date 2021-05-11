@@ -29,6 +29,13 @@ class Utils {
 
     private fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
     private fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this).matches()
-    private fun String.isValidPhone(): Boolean = Patterns.PHONE.matcher(this).matches()
+    //private fun String.isValidPhone(): Boolean = Patterns.PHONE.matcher(this).matches()
+
+    private fun String.isValidPhone(): Boolean {
+        if ("tel:" in  this) {
+            return true
+        }
+        return false
+    }
 
 }

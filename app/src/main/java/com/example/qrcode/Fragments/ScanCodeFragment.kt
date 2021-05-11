@@ -67,6 +67,28 @@ class ScanCodeFragment : Fragment() {
                     startActivity(intent)
                 }
 
+                if (utils.getQrCodeType(it.text) == "phone") {
+                    val phone = it.text.replace("tel:", "")
+                    database.insertHistory(phone, "contact")
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse(it.text)
+                    startActivity(intent)
+                    //Toast.makeText(requireContext(), phone, Toast.LENGTH_LONG).show()
+                }
+
+                if ("SMSTO:" in it.text) {
+                    val smsCode = it.text.split(":")
+                    //database.insertHistory(phone, "sms")
+                    val intent = Intent(Intent.ACTION_SENDTO)
+                    intent.data = Uri.parse("smsto:" + smsCode[1])
+                    intent.putExtra("sms_body", smsCode[2]);
+                    startActivity(intent)
+                    //Toast.makeText(requireContext(), smsCode[1], Toast.LENGTH_LONG).show()
+                }
+
+
+                //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
+
                 //Toast.makeText(requireContext(), utils.getQrCodeType(it.text), Toast.LENGTH_LONG).show()
                 ///if (!url.isValidUrl()) {
                     //Toast.makeText(requireContext(), "no url", Toast.LENGTH_LONG).show()

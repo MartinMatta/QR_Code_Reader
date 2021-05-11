@@ -64,10 +64,10 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         val database = this.writableDatabase
         val result = database.insert(table, null, contentValues)
         if (result == (0).toLong()) {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
         }
         else {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
         }
     }
 
