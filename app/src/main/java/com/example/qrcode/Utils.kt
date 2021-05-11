@@ -27,16 +27,8 @@ class Utils {
     //}
 
 
-    fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
-    fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this).matches()
-    fun String.isValidPhone(): Boolean = Patterns.PHONE.matcher(this).matches()
+    private fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
+    private fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    private fun String.isValidPhone(): Boolean = Patterns.PHONE.matcher(this).matches()
 
-    //when (true) {
-        //text.isValidEmail() -> return "email"
-        //text.isValidPhone() -> return "phone"
-        //text.isValidUrl() -> return "url"
-        //else -> {
-            //return "text"
-        //}
-    //}
 }
