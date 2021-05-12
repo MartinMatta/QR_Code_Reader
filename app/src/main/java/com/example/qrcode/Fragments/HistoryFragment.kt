@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.qrcode.ListAdapter
 import com.example.qrcode.Model
@@ -32,8 +33,14 @@ class HistoryFragment : Fragment() {
         val listView: ListView = view.findViewById(R.id.listView)
 
         val database = QrCodeDatabase(requireContext(), "history")
-
         val data = database.readHistory()
+
+        listView.setOnItemClickListener {parent, view, position, id ->
+            var id = data[position]
+            Toast.makeText(requireContext(), id.,Toast.LENGTH_SHORT).show()
+        }
+
+
 
         if (data.isNotEmpty()) {
             listView.adapter = ListAdapter(

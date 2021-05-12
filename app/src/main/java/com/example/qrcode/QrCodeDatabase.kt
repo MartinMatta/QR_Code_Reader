@@ -116,8 +116,7 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
                         val type: String = cursor.getString(cursor.getColumnIndex(COL_TYPE))
                         val date: String = cursor.getString(cursor.getColumnIndex(COL_DATE))
 
-                        list.add(Model(name, date, R.mipmap.ic_launcher)
-                        )
+                        list.add(Model(name, date, R.mipmap.ic_launcher))
                     } while ((cursor.moveToNext()))
                 }
             }

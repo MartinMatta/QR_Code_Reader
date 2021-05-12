@@ -54,7 +54,7 @@ class ScanCodeFragment : Fragment() {
         val activity = requireActivity()
         codeScanner = CodeScanner(activity, scannerView)
         codeScanner.camera = CodeScanner.CAMERA_BACK
-        codeScanner.formats = CodeScanner.TWO_DIMENSIONAL_FORMATS // all_format
+        codeScanner.formats = CodeScanner.ALL_FORMATS // all_format
         codeScanner.autoFocusMode = AutoFocusMode.SAFE
         codeScanner.scanMode = ScanMode.SINGLE
         codeScanner.isAutoFocusEnabled = true
@@ -64,6 +64,8 @@ class ScanCodeFragment : Fragment() {
             activity.runOnUiThread {
                 //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
                 //var url = "martinmatta355@gmail.com"
+
+                it.rawBytes
 
                 if (utils.getQrCodeType(it.text) == "url") {
                     database.insertHistory(it.text, "url")
@@ -106,7 +108,8 @@ class ScanCodeFragment : Fragment() {
                 }
 
 
-                //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
+                //it.barcodeFormat.toString()
 
                 //Toast.makeText(requireContext(), utils.getQrCodeType(it.text), Toast.LENGTH_LONG).show()
                 ///if (!url.isValidUrl()) {
