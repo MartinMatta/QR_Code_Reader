@@ -1,5 +1,6 @@
 package com.example.qrcode.Fragments
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,6 +25,8 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+
+        activity?.window?.statusBarColor =  Color.parseColor("#ffffff");
 
         val view: View = inflater.inflate(R.layout.fragment_history, container, false)
         val listView: ListView = view.findViewById(R.id.listView)

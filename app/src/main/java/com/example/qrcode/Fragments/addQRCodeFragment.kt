@@ -2,6 +2,7 @@ package com.example.qrcode.Fragments
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -38,6 +39,8 @@ class addQRCodeFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        activity?.window?.statusBarColor =  Color.parseColor("#ffffff");
 
         val view =  inflater.inflate(R.layout.fragment_add_qr_code, container, false)
 

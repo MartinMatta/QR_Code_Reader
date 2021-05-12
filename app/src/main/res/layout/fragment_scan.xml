@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ScanFragment"
     android:background="#fbfbfb"
+    android:theme="@style/Theme.Scan"
     tools:ignore="MissingClass">
 
 

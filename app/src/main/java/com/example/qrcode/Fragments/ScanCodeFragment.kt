@@ -1,12 +1,15 @@
 package com.example.qrcode.Fragments
 
 import android.Manifest
+import android.app.ActionBar
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,6 +31,8 @@ class ScanCodeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        activity?.window?.statusBarColor =  Color.parseColor("#0e5e9b");
 
         if (ContextCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
@@ -84,6 +89,20 @@ class ScanCodeFragment : Fragment() {
                     intent.putExtra("sms_body", smsCode[2]);
                     startActivity(intent)
                     //Toast.makeText(requireContext(), smsCode[1], Toast.LENGTH_LONG).show()
+                }
+
+                if ("MATMSG:" in it.text) {
+
+                    val msgCode = it.text.split(":")
+
+                    val intent = Intent(Intent.ACTION_SEND)
+                    val addressees = arrayOf(msgCode[2].split(";")[0])
+                    intent.putExtra(Intent.EXTRA_EMAIL, addressees)
+                    intent.putExtra(Intent.EXTRA_SUBJECT, msgCode[3].split(";")[0])
+                    intent.putExtra(Intent.EXTRA_TEXT, msgCode[4].split(";")[0])
+                    intent.type = "message/rfc822"
+                    startActivity(Intent.createChooser(intent, "Send Email using:"));
+                    //Toast.makeText(requireContext(), msgCode[4].split(";")[0], Toast.LENGTH_LONG).show()
                 }
 
 

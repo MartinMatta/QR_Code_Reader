@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.parseColor("#ffffff");
 
-
-
         if (savedInstanceState == null) {
             startFragment(ScanFragment())
         }
