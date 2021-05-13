@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Show_QR_Fragment"
+    android:background="#fbfbfb"
+    android:theme="@style/Theme.Scan"
+    tools:ignore="MissingClass">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text="URL"
+                android:padding="1dp"/>
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lines="1"
+                android:text="https://github.com/yuriy-budiyev/code-scanner"
+                android:padding="1dp"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="250dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="1dp"
+                android:src="@drawable/qrcode"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonShare"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/open"
+                android:layout_marginRight="16dp"
+
+                android:textColor="@color/black"
+                android:text="Open" />
+
+            <Button
+                android:id="@+id/buttonS"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/share"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/black"
+                android:text="Share" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

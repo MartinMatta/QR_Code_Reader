@@ -37,7 +37,9 @@ class HistoryFragment : Fragment() {
 
         listView.setOnItemClickListener {parent, view, position, id ->
             var id = data[position]
-            Toast.makeText(requireContext(), id.,Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), id.id.toString(),Toast.LENGTH_SHORT).show()
+            database.delete(id.id, database.TABLE_HISTORY)
+            listView.removeViewAt(position)
         }
 
 

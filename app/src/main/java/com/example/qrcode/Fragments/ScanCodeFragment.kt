@@ -65,7 +65,10 @@ class ScanCodeFragment : Fragment() {
                 //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
                 //var url = "martinmatta355@gmail.com"
 
-                it.rawBytes
+                val fragment = Show_QR_Fragment()
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame, fragment)
+                    ?.commit();
 
                 if (utils.getQrCodeType(it.text) == "url") {
                     database.insertHistory(it.text, "url")
