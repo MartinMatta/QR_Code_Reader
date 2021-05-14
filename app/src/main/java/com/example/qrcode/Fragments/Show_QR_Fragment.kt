@@ -1,10 +1,12 @@
 package com.example.qrcode.Fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import com.example.qrcode.R
 
 private const val ARG_PARAM1 = "param1"
@@ -23,11 +25,22 @@ class Show_QR_Fragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_show__qr, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+
+        activity?.window?.statusBarColor =  Color.parseColor("#ffffff");
+
+        var view = inflater.inflate(R.layout.fragment_show__qr, container, false)
+
+        val backButton: ImageButton = view.findViewById(R.id.back_button)
+
+        backButton.setOnClickListener() {
+            val fragment = ScanCodeFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.frame, fragment)
+                ?.commit();
+        }
+        return view
     }
 
     companion object {
