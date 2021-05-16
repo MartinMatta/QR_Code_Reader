@@ -49,7 +49,7 @@
                 android:textSize="26dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="URL" />
+                android:text="Type" />
 
         </LinearLayout>
 
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="1"
-                    android:text="aaa"
+                    android:text="data"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -88,21 +88,22 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/buttonShare"
+                        android:id="@+id/buttonOpen"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:drawableTop="@drawable/open"
                         android:layout_marginRight="16dp"
-
                         android:textColor="@color/black"
                         android:text="Open" />
 
                     <Button
-                        android:id="@+id/buttonS"
+                        android:id="@+id/buttonShare"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:drawableTop="@drawable/share"
