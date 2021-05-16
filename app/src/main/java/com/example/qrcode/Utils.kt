@@ -14,6 +14,7 @@ class Utils {
             text.isValidEmail() -> "email"
             text.isValidPhone() -> "phone"
             text.isValidUrl() -> "url"
+            text.isValidSMS() -> "sms"
             else -> {
                 "text"
             }
@@ -28,8 +29,22 @@ class Utils {
 
 
     private fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
-    private fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    //private fun String.isValidEmail(): Boolean = Patterns.EMAIL_ADDRESS.matcher(this).matches()
     //private fun String.isValidPhone(): Boolean = Patterns.PHONE.matcher(this).matches()
+
+    private fun String.isValidSMS(): Boolean {
+        if ("SMSTO:" in  this) {
+            return true
+        }
+        return false
+    }
+
+    private fun String.isValidEmail(): Boolean {
+        if ("MATMSG:" in  this) {
+            return true
+        }
+        return false
+    }
 
     private fun String.isValidPhone(): Boolean {
         if ("tel:" in  this) {

@@ -1,25 +1,21 @@
 package com.example.qrcode.Fragments
 
 import android.Manifest
-import android.app.ActionBar
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.budiyev.android.codescanner.*
 import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
@@ -62,56 +58,60 @@ class ScanCodeFragment : Fragment() {
 
         codeScanner.decodeCallback = DecodeCallback {
             activity.runOnUiThread {
-                //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
-                //var url = "martinmatta355@gmail.com"
 
-                val fragment = Show_QR_Fragment()
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.frame, fragment)
-                    ?.commit();
-
-                if (utils.getQrCodeType(it.text) == "url") {
-                    database.insertHistory(it.text, "url")
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(it.text)
-                    startActivity(intent)
+                when (true) {
+                    utils.getQrCodeType(it.text) == "url" -> startFragment("URL", it.text)
+                    utils.getQrCodeType(it.text) == "phone" -> startFragment("Tel", it.text)
+                    utils.getQrCodeType(it.text) == "sms" -> startFragment("SMS", it.text)
+                    utils.getQrCodeType(it.text) == "email" -> startFragment("Email", it.text)
+                    utils.getQrCodeType(it.text) == "text" -> startFragment("Text", it.text)
+                    else -> {
+                        "text"
+                    }
                 }
 
-                if (utils.getQrCodeType(it.text) == "phone") {
-                    val phone = it.text.replace("tel:", "")
-                    database.insertHistory(phone, "contact")
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse(it.text)
-                    startActivity(intent)
+                //if (utils.getQrCodeType(it.text) == "url") {
+                    //database.insertHistory(it.text, "url")
+                    //val intent = Intent(Intent.ACTION_VIEW)
+                    //intent.data = Uri.parse(it.text)
+                    //startActivity(intent)
+                //}
+
+                //if (utils.getQrCodeType(it.text) == "phone") {
+                    //val phone = it.text.replace("tel:", "")
+                    //database.insertHistory(phone, "contact")
+                    //val intent = Intent(Intent.ACTION_DIAL)
+                    //intent.data = Uri.parse(it.text)
+                    //startActivity(intent)
                     //Toast.makeText(requireContext(), phone, Toast.LENGTH_LONG).show()
-                }
+                //}
 
-                if ("SMSTO:" in it.text) {
-                    val smsCode = it.text.split(":")
+                //if ("SMSTO:" in it.text) {
+                    //val smsCode = it.text.split(":")
                     //database.insertHistory(phone, "sms")
-                    val intent = Intent(Intent.ACTION_SENDTO)
-                    intent.data = Uri.parse("smsto:" + smsCode[1])
-                    intent.putExtra("sms_body", smsCode[2]);
-                    startActivity(intent)
+                    //val intent = Intent(Intent.ACTION_SENDTO)
+                    //intent.data = Uri.parse("smsto:" + smsCode[1])
+                    //intent.putExtra("sms_body", smsCode[2]);
+                    //startActivity(intent)
                     //Toast.makeText(requireContext(), smsCode[1], Toast.LENGTH_LONG).show()
-                }
+                //}
 
-                if ("MATMSG:" in it.text) {
+                //if ("MATMSG:" in it.text) {
 
-                    val msgCode = it.text.split(":")
+                    //val msgCode = it.text.split(":")
 
-                    val intent = Intent(Intent.ACTION_SEND)
-                    val addressees = arrayOf(msgCode[2].split(";")[0])
-                    intent.putExtra(Intent.EXTRA_EMAIL, addressees)
-                    intent.putExtra(Intent.EXTRA_SUBJECT, msgCode[3].split(";")[0])
-                    intent.putExtra(Intent.EXTRA_TEXT, msgCode[4].split(";")[0])
-                    intent.type = "message/rfc822"
-                    startActivity(Intent.createChooser(intent, "Send Email using:"));
+                    //val intent = Intent(Intent.ACTION_SEND)
+                    //val addressees = arrayOf(msgCode[2].split(";")[0])
+                    //intent.putExtra(Intent.EXTRA_EMAIL, addressees)
+                    //intent.putExtra(Intent.EXTRA_SUBJECT, msgCode[3].split(";")[0])
+                    //intent.putExtra(Intent.EXTRA_TEXT, msgCode[4].split(";")[0])
+                    //intent.type = "message/rfc822"
+                    //startActivity(Intent.createChooser(intent, "Send Email using:"));
                     //Toast.makeText(requireContext(), msgCode[4].split(";")[0], Toast.LENGTH_LONG).show()
-                }
+                //}
 
 
-                Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
+                //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
                 //it.barcodeFormat.toString()
 
                 //Toast.makeText(requireContext(), utils.getQrCodeType(it.text), Toast.LENGTH_LONG).show()
@@ -148,5 +148,17 @@ class ScanCodeFragment : Fragment() {
     }
 
     fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
+
+    fun startFragment(type: String, data: String) {
+        val bundle = Bundle()
+        bundle.putString("QrType", type)
+        bundle.putString("QrData", data)
+
+        val fragment = Show_QR_Fragment()
+        fragment.arguments = bundle
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.frame, fragment)
+                ?.commit();
+    }
 
 }

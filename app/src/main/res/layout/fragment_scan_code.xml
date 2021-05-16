@@ -37,11 +37,11 @@
         app:flashButtonVisible="true"
         app:frameColor="@android:color/white"
         app:frameCornersSize="50dp"
-        app:frameCornersRadius="0dp"
+        app:frameCornersRadius="32dp"
         app:frameAspectRatioWidth="1"
         app:frameAspectRatioHeight="1"
         app:frameSize="0.75"
         app:frameThickness="2dp"
-        app:maskColor="#77000000"/>
+        app:maskColor="#4D5E5C5C"/>
 
 </FrameLayout>
