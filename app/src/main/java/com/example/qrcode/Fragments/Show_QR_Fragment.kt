@@ -70,7 +70,7 @@ class Show_QR_Fragment : Fragment() {
         shareButton.setOnClickListener {
             when (true) {
                 qrType == "URL" -> shareData(qrData)
-                qrType == "SMS" -> shareSMS(qrData) // 00
+                qrType == "SMS" -> shareSMS(qrData)
                 qrType == "Tel" -> sharePhone(qrData)
                 qrType == "Email" -> shareEmail(qrData)
                 else -> {
