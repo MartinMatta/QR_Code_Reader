@@ -50,12 +50,14 @@ import kotlin.system.exitProcess
 
         val data = database.readMyCode(requireContext())
 
+        val adapter: ListAdapter = ListAdapter(
+                requireActivity(),
+                R.layout.row,
+                data
+        )
+
         if (data.isNotEmpty()) {
-            listView.adapter = ListAdapter(
-                    requireActivity(),
-                    R.layout.row,
-                    data
-            )
+            listView.adapter = adapter
         }
 
         listView.emptyView = view.findViewById(R.id.emptyElement);
