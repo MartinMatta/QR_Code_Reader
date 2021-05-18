@@ -35,21 +35,22 @@ class HistoryFragment : Fragment() {
         val database = QrCodeDatabase(requireContext(), "history")
         val data = database.readHistory()
 
-        listView.setOnItemClickListener {parent, view, position, id ->
-            var id = data[position]
-            Toast.makeText(requireContext(), id.id.toString(),Toast.LENGTH_SHORT).show()
-            database.delete(id.id, database.TABLE_HISTORY)
-            listView.removeViewAt(position)
-        }
-
-
-
-        if (data.isNotEmpty()) {
-            listView.adapter = ListAdapter(
+        val adapter: ListAdapter = ListAdapter(
                 requireActivity(),
                 R.layout.row,
                 data
-            )
+        )
+
+        if (data.isNotEmpty()) {
+            listView.adapter = adapter
+        }
+
+        listView.setOnItemClickListener {parent, view, position, id ->
+            var id = data[position]
+            //Toast.makeText(requireContext(), id.id.toString(),Toast.LENGTH_SHORT).show()
+            database.delete(id.id, database.TABLE_HISTORY)
+            adapter.remove(data[position])
+            adapter.notifyDataSetChanged()
         }
 
         listView.emptyView = view.findViewById(R.id.emptyElement);
