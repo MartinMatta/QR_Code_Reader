@@ -60,6 +60,14 @@ import kotlin.system.exitProcess
             listView.adapter = adapter
         }
 
+        listView.setOnItemClickListener {parent, view, position, id ->
+            var id = data[position]
+            //Toast.makeText(requireContext(), id.id.toString(),Toast.LENGTH_SHORT).show()
+            database.delete(id.id, database.TABLE_HISTORY)
+            adapter.remove(data[position])
+            adapter.notifyDataSetChanged()
+        }
+
         listView.emptyView = view.findViewById(R.id.emptyElement);
 
         return view
