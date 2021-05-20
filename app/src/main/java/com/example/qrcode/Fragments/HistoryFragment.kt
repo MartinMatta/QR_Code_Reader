@@ -19,7 +19,6 @@ class HistoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //activity?.title = "History"
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -47,7 +46,6 @@ class HistoryFragment : Fragment() {
 
         listView.setOnItemClickListener {parent, view, position, id ->
             var id = data[position]
-            //Toast.makeText(requireContext(), id.id.toString(),Toast.LENGTH_SHORT).show()
             database.delete(id.id, database.TABLE_HISTORY)
             adapter.remove(data[position])
             adapter.notifyDataSetChanged()
