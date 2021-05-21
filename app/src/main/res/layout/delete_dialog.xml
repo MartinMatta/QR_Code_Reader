@@ -9,14 +9,6 @@
     android:padding="16dp"
     tools:ignore="MissingClass">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:paddingTop="32dp"
-        android:paddingBottom="32dp"
-        android:src="@drawable/qrcode"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +16,7 @@
         android:paddingBottom="16dp"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:text="čo urobit s kodom"/>
+        android:text="chcete naozaj odstranit qr kod"/>
 
 
     <TableLayout
