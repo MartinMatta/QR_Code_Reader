@@ -4,6 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exit_text">Are you sure want to exit ?</string>
     <string name="scan_button_text">Scan</string>
+    <string name="delete_button_text">delete</string>
+    <string name="share_button_text">share</string>
 
     <string-array name="generate_menu">
         <item>text</item>
