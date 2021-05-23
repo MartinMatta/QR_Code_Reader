@@ -55,6 +55,7 @@ class Show_QR_Fragment : Fragment() {
             qrType == "SMS" -> textQrData.text = editSMS(qrData)
             qrType == "Tel" -> textQrData.text = qrData.split(":")[1]
             qrType == "Email" -> textQrData.text = editEmail(qrData)
+            qrType == "WiFi" -> textQrData.text = qrData//editEmail(qrData)
             else -> {
                 textQrData.text = qrData
             }

@@ -63,6 +63,7 @@ class ScanCodeFragment : Fragment() {
                     utils.getQrCodeType(it.text) == "sms" -> startFragment("SMS", it.text)
                     utils.getQrCodeType(it.text) == "email" -> startFragment("Email", it.text)
                     utils.getQrCodeType(it.text) == "text" -> startFragment("Text", it.text)
+                    utils.getQrCodeType(it.text) == "wifi" -> startFragment("WiFi", it.text)
                     else -> {
                         "text"
                     }

@@ -15,6 +15,7 @@ class Utils {
             text.isValidPhone() -> "phone"
             text.isValidUrl() -> "url"
             text.isValidSMS() -> "sms"
+            text.isValidWiFi() -> "wifi"
             else -> {
                 "text"
             }
@@ -25,6 +26,13 @@ class Utils {
 
     private fun String.isValidSMS(): Boolean {
         if ("SMSTO:" in  this) {
+            return true
+        }
+        return false
+    }
+
+    private fun String.isValidWiFi(): Boolean {
+        if ("WIFI:" in  this) {
             return true
         }
         return false
