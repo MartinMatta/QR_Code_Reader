@@ -8,12 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.qrcode.ListAdapter
-import com.example.qrcode.Model
-import com.example.qrcode.QrCodeDatabase
-import com.example.qrcode.R
+import com.example.qrcode.*
 
 class HistoryFragment : Fragment() {
 
@@ -34,7 +30,7 @@ class HistoryFragment : Fragment() {
         val database = QrCodeDatabase(requireContext(), "history")
         val data = database.readHistory()
 
-        val adapter: ListAdapter = ListAdapter(
+        var adapter: ListAdapter = ListAdapter(
                 requireActivity(),
                 R.layout.row,
                 data
@@ -45,9 +41,12 @@ class HistoryFragment : Fragment() {
         }
 
         listView.setOnItemClickListener {parent, view, position, id ->
-            var id = data[position]
-            database.delete(id.id, database.TABLE_HISTORY)
-            adapter.remove(data[position])
+            //var id = data[position]
+            //database.delete(id.id, database.TABLE_HISTORY)
+            //adapter.remove(data[position])
+            //adapter.notifyDataSetChanged()
+            val deleteDialog = DeleteDialog(requireContext(), adapter)
+            adapter = deleteDialog.show(data[position])
             adapter.notifyDataSetChanged()
         }
 
