@@ -3,6 +3,7 @@ package com.example.qrcode.Fragments
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 
 class Show_QR_Fragment : Fragment() {
@@ -23,6 +26,7 @@ class Show_QR_Fragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -34,6 +38,9 @@ class Show_QR_Fragment : Fragment() {
             qrType = arguments!!.getString("QrType").toString()
             qrData = arguments!!.getString("QrData").toString()
         }
+
+        var database = QrCodeDatabase(requireContext(), "history")
+        database.insertHistory(qrData, qrType)
 
         var view = inflater.inflate(R.layout.fragment_show__qr, container, false)
 

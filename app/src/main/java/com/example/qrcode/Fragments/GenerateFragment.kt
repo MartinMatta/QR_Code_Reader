@@ -13,10 +13,7 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import com.example.qrcode.ListAdapter
-import com.example.qrcode.Model
-import com.example.qrcode.QrCodeDatabase
-import com.example.qrcode.R
+import com.example.qrcode.*
 import kotlin.system.exitProcess
 
   class GenerateFragment : Fragment() {
@@ -50,7 +47,7 @@ import kotlin.system.exitProcess
 
         val data = database.readMyCode(requireContext())
 
-        val adapter: ListAdapter = ListAdapter(
+        var adapter: ListAdapter = ListAdapter(
                 requireActivity(),
                 R.layout.row,
                 data
@@ -62,9 +59,8 @@ import kotlin.system.exitProcess
 
         listView.setOnItemClickListener {parent, view, position, id ->
             var id = data[position]
-            //Toast.makeText(requireContext(), id.id.toString(),Toast.LENGTH_SHORT).show()
-            database.delete(id.id, database.TABLE_HISTORY)
-            adapter.remove(data[position])
+            val deleteDialog = DeleteDialog(requireContext(), adapter, database.TABLE_MY_CODE)
+            adapter = deleteDialog.show(data[position], database, id.id)
             adapter.notifyDataSetChanged()
         }
 

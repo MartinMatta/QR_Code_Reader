@@ -69,57 +69,6 @@ class ScanCodeFragment : Fragment() {
                         "text"
                     }
                 }
-
-                //if (utils.getQrCodeType(it.text) == "url") {
-                    //database.insertHistory(it.text, "url")
-                    //val intent = Intent(Intent.ACTION_VIEW)
-                    //intent.data = Uri.parse(it.text)
-                    //startActivity(intent)
-                //}
-
-                //if (utils.getQrCodeType(it.text) == "phone") {
-                    //val phone = it.text.replace("tel:", "")
-                    //database.insertHistory(phone, "contact")
-                    //val intent = Intent(Intent.ACTION_DIAL)
-                    //intent.data = Uri.parse(it.text)
-                    //startActivity(intent)
-                    //Toast.makeText(requireContext(), phone, Toast.LENGTH_LONG).show()
-                //}
-
-                //if ("SMSTO:" in it.text) {
-                    //val smsCode = it.text.split(":")
-                    //database.insertHistory(phone, "sms")
-                    //val intent = Intent(Intent.ACTION_SENDTO)
-                    //intent.data = Uri.parse("smsto:" + smsCode[1])
-                    //intent.putExtra("sms_body", smsCode[2]);
-                    //startActivity(intent)
-                    //Toast.makeText(requireContext(), smsCode[1], Toast.LENGTH_LONG).show()
-                //}
-
-                //if ("MATMSG:" in it.text) {
-
-                    //val msgCode = it.text.split(":")
-
-                    //val intent = Intent(Intent.ACTION_SEND)
-                    //val addressees = arrayOf(msgCode[2].split(";")[0])
-                    //intent.putExtra(Intent.EXTRA_EMAIL, addressees)
-                    //intent.putExtra(Intent.EXTRA_SUBJECT, msgCode[3].split(";")[0])
-                    //intent.putExtra(Intent.EXTRA_TEXT, msgCode[4].split(";")[0])
-                    //intent.type = "message/rfc822"
-                    //startActivity(Intent.createChooser(intent, "Send Email using:"));
-                    //Toast.makeText(requireContext(), msgCode[4].split(";")[0], Toast.LENGTH_LONG).show()
-                //}
-
-
-                //Toast.makeText(requireContext(), it.text, Toast.LENGTH_LONG).show()
-                //it.barcodeFormat.toString()
-
-                //Toast.makeText(requireContext(), utils.getQrCodeType(it.text), Toast.LENGTH_LONG).show()
-                ///if (!url.isValidUrl()) {
-                    //Toast.makeText(requireContext(), "no url", Toast.LENGTH_LONG).show()
-                //}else{
-                    //Toast.makeText(requireContext(), "url", Toast.LENGTH_LONG).show()
-                //}
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS

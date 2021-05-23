@@ -41,12 +41,9 @@ class HistoryFragment : Fragment() {
         }
 
         listView.setOnItemClickListener {parent, view, position, id ->
-            //var id = data[position]
-            //database.delete(id.id, database.TABLE_HISTORY)
-            //adapter.remove(data[position])
-            //adapter.notifyDataSetChanged()
-            val deleteDialog = DeleteDialog(requireContext(), adapter)
-            adapter = deleteDialog.show(data[position])
+            var id = data[position]
+            val deleteDialog = DeleteDialog(requireContext(), adapter, database.TABLE_HISTORY)
+            adapter = deleteDialog.show(data[position], database, id.id)
             adapter.notifyDataSetChanged()
         }
 

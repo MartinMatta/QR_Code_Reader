@@ -5,10 +5,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Button
 
-class DeleteDialog(private var context: Context, private var adapter: ListAdapter) {
+class DeleteDialog(private var context: Context,
+                   private var adapter: ListAdapter, private var table: String) {
 
 
-    fun show(position: Model) :ListAdapter {
+    fun show(position: Model, database: QrCodeDatabase, id: Int) :ListAdapter {
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.delete_dialog, null)
         val mBuilder = AlertDialog.Builder(context)
                 .setView(mDialogView)
@@ -24,6 +25,7 @@ class DeleteDialog(private var context: Context, private var adapter: ListAdapte
 
         btnOk.setOnClickListener {
             adapter.remove(position)
+            database.delete(id, table)
             mAlertDialog.dismiss()
         }
         return adapter
