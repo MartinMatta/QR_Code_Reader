@@ -1,5 +1,6 @@
 package com.example.qrcode
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -12,10 +13,11 @@ import android.util.Log
 import android.widget.Toast
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
-import androidx.annotation.RequiresApi
 import com.google.zxing.WriterException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 const val DATABASE = "Database"
@@ -71,7 +73,6 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun insertHistory(name: String, type: String) {
 
         val database = this.writableDatabase
@@ -83,8 +84,6 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         insert(TABLE_HISTORY, contentValues)
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun insertMyCode(name: String, type: String) {
 
         val database = this.writableDatabase
@@ -164,11 +163,11 @@ class QrCodeDatabase(private var context: Context, private val TABLE: String):
         return success
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SimpleDateFormat")
     fun getDateTime(): String {
-        val dateTime = LocalDateTime.now()
-        return dateTime.format(DateTimeFormatter.ofPattern("d/M/y HH:mm a"))
+        var calendar: Calendar = Calendar.getInstance()
+        var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm aaa")
+        return simpleDateFormat.format(calendar.time).toString()
     }
 
     fun generateQRCode(context: Context, name: String, type: String): Bitmap? {

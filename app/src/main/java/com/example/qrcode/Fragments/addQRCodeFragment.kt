@@ -16,7 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
-import androidx.annotation.RequiresApi
+import androidmads.library.qrgenearator.QRGSaver
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.qrcode.MainActivity
@@ -36,7 +36,6 @@ class addQRCodeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -68,6 +67,7 @@ class addQRCodeFragment : Fragment() {
                         type
                     )
                     qrImage?.setImageBitmap(bitmap)
+
                     return true
                 }
                 return false
@@ -76,6 +76,7 @@ class addQRCodeFragment : Fragment() {
 
         saveButton.setOnClickListener() {
             database.insertMyCode(qrText!!.text.toString(), qrSpinner!!.selectedItem.toString())
+            //QRGSaver.save(savePath, edtValue.getText().toString().trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG);
         }
 
         shareButton.setOnClickListener() {

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/image_corner"
+    android:background="@drawable/delete_dialog_corner"
     tools:ignore="MissingClass">
 
     <TextView
@@ -17,7 +17,7 @@
         android:paddingBottom="16dp"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:text="chcete naozaj odstranit qr kod"/>
+        android:text="@string/delete_dialog_text"/>
 
 
     <TableLayout
