@@ -38,9 +38,7 @@ class Intents {
                 dataBlock[i][0] == 'E' -> wifiInfo["eap"] = dataBlock[i].split(":")[1]
                 dataBlock[i][0] == 'A' -> wifiInfo["anon"] = dataBlock[i].split(":")[1]
                 dataBlock[i][0] == 'I' -> wifiInfo["myidentity"] = dataBlock[i].split(":")[1]
-                else -> {
-                    println("ok")
-                }
+
             }
 
         }
