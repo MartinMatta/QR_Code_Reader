@@ -97,7 +97,7 @@ class ScanCodeFragment : Fragment() {
 
     fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
 
-    fun startFragment(type: String, data: String) { //add code type (barcode, qrcode)
+    fun startFragment(type: String, data: String, codeFormat: String) { //add code type (barcode, qrcode)
         val bundle = Bundle()
         bundle.putString("QrType", type)
         bundle.putString("QrData", data)
