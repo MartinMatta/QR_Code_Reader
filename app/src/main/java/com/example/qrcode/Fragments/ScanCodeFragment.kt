@@ -101,6 +101,7 @@ class ScanCodeFragment : Fragment() {
         val bundle = Bundle()
         bundle.putString("QrType", type)
         bundle.putString("QrData", data)
+        bundle.putString("CodeType", codeFormat)
 
         val fragment = Show_QR_Fragment()
         fragment.arguments = bundle
