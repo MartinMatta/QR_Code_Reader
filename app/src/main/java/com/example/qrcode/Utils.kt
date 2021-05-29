@@ -59,6 +59,4 @@ class Utils {
         return false
     }
 
-
-
 }
