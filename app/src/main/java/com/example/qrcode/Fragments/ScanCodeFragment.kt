@@ -58,7 +58,7 @@ class ScanCodeFragment : Fragment() {
             activity.runOnUiThread {
 
                 when (true) {
-                    utils.getQrCodeType(it.text) == "url" -> startFragment("URL", it.text)
+                    utils.getQrCodeType(it.text) == "url" -> startFragment("URL", it.text,);
                     utils.getQrCodeType(it.text) == "phone" -> startFragment("Tel", it.text)
                     utils.getQrCodeType(it.text) == "sms" -> startFragment("SMS", it.text)
                     utils.getQrCodeType(it.text) == "email" -> startFragment("Email", it.text)
@@ -100,7 +100,7 @@ class ScanCodeFragment : Fragment() {
     fun startFragment(type: String, data: String, codeFormat: String) { //add code type (barcode, qrcode)
         val bundle = Bundle()
         bundle.putString("QrType", type)
-        bundle.putString("QrData", data)
+        bundle.putString("QrData", data) ľ
         bundle.putString("CodeType", codeFormat)
 
         val fragment = Show_QR_Fragment()

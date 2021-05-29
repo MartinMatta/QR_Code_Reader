@@ -21,13 +21,10 @@ class Intents {
         return  "$number\n$msg"
     }
 
-    fun getWifiInfo(): MutableMap<String?, String?> {
-        var dataBlock: List<String>
+    fun getWifiInfo(data: String): MutableMap<String?, String?> {
         val wifiInfo: MutableMap<String?, String?> = HashMap()
-
-        var dataset: String = "WIFI:T:WPA;S:janca;P:2gtd58cn1;;".replace("WIFI:", "")
         // return T:WPA;S:mynetwork;P:mypass;;
-        dataBlock = dataset.split(";")
+        var dataBlock: List<String> = data.split(";")
 
         for (i in 0..dataBlock.size/2) {
             when (true) {

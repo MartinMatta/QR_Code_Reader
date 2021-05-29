@@ -39,7 +39,7 @@ class Utils {
     }
 
     private fun String.isValidEmail(): Boolean {
-        if ("MATMSG:" in  this) {
+        if ("MATMSG:" in  this) { //mailto in this
             return true
         }
         return false
@@ -47,6 +47,13 @@ class Utils {
 
     private fun String.isValidPhone(): Boolean {
         if ("tel:" in  this) {
+            return true
+        }
+        return false
+    }
+
+    private fun String.isValidGeo(): Boolean {
+        if ("Geo:" in  this) {
             return true
         }
         return false
