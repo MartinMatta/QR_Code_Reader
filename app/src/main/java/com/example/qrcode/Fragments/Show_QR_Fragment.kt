@@ -12,13 +12,16 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.qrcode.BackPress
+import com.example.qrcode.Intents
 import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 
-class Show_QR_Fragment : Fragment() {
+class Show_QR_Fragment : Fragment(), BackPress {
 
-    var qrType: String = ""
-    var qrData: String = ""
+    private var qrType: String = ""
+    private var qrData: String = ""
+    private var qrDataType: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +52,7 @@ class Show_QR_Fragment : Fragment() {
         val shareButton: Button = view.findViewById(R.id.buttonShare)
 
         textQrType.text = qrType
+        var i = Intents()
 
         when (true) {
             qrType == "URL" -> textQrData.text = qrData
@@ -56,6 +60,7 @@ class Show_QR_Fragment : Fragment() {
             qrType == "Tel" -> textQrData.text = qrData.split(":")[1]
             qrType == "Email" -> textQrData.text = editEmail(qrData)
             qrType == "WiFi" -> textQrData.text = qrData//editEmail(qrData)
+            qrType == "Geo" -> textQrData.text = qrData
             else -> {
                 textQrData.text = qrData
             }
@@ -63,10 +68,10 @@ class Show_QR_Fragment : Fragment() {
 
         openButton.setOnClickListener {
             when (true) {
-                qrType == "URL" -> openURL(qrData)
-                qrType == "SMS" -> openSMS(qrData)
-                qrType == "Tel" -> openPhone(qrData)
-                qrType == "Email" -> openEmail(qrData)
+                qrType == "URL" -> startActivity(i.urlActivity(qrData))
+                qrType == "SMS" -> startActivity(i.smsActivity(qrData))
+                qrType == "Tel" -> startActivity(i.phoneActivity(qrData))
+                qrType == "Email" -> startActivity(i.emailActivity(qrData))
                 else -> {
                     textQrData.text = qrData
                 }
@@ -182,6 +187,10 @@ class Show_QR_Fragment : Fragment() {
         val text = "$number\n$msg"
         i.putExtra(Intent.EXTRA_TEXT, text)
         startActivity(Intent.createChooser(i, "Share URL"))
+    }
+
+    override fun onBackPressed() {
+        TODO("Not yet implemented")
     }
 
 }

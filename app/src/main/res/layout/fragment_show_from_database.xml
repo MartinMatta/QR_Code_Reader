@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Show_QR_Fragment"
+    android:background="#fbfbfb"
+    android:theme="@style/Theme.Scan"
+    tools:ignore="MissingClass">
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginLeft="4dp">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_alignParentEnd="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="64dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/qr_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Type" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/qr_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:text="data"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/qr_image"
+                    android:layout_width="280dp"
+                    android:layout_height="280dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="aaa"
+                    android:src="@drawable/qrcode"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonOpen"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/open"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@color/black"
+                        android:text="Open" />
+
+                    <Button
+                        android:id="@+id/buttonShare"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/share"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="@color/black"
+                        android:text="Share" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonDelete"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/open"
+                        android:layout_marginRight="16dp"
+                        android:textColor="@color/black"
+                        android:text="Delete" />
+
+                    <Button
+                        android:id="@+id/buttonEdit"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/share"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="@color/black"
+                        android:text="Edit" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

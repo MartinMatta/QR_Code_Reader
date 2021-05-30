@@ -1,11 +1,8 @@
 package com.example.qrcode.Fragments
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -19,6 +16,7 @@ import com.budiyev.android.codescanner.*
 import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 import com.example.qrcode.Utils
+import com.google.zxing.BarcodeFormat
 
 class ScanCodeFragment : Fragment() {
     private lateinit var codeScanner: CodeScanner
@@ -58,12 +56,12 @@ class ScanCodeFragment : Fragment() {
             activity.runOnUiThread {
 
                 when (true) {
-                    utils.getQrCodeType(it.text) == "url" -> startFragment("URL", it.text,);
-                    utils.getQrCodeType(it.text) == "phone" -> startFragment("Tel", it.text)
-                    utils.getQrCodeType(it.text) == "sms" -> startFragment("SMS", it.text)
-                    utils.getQrCodeType(it.text) == "email" -> startFragment("Email", it.text)
-                    utils.getQrCodeType(it.text) == "text" -> startFragment("Text", it.text)
-                    utils.getQrCodeType(it.text) == "wifi" -> startFragment("WiFi", it.text)
+                    utils.getQrCodeType(it.text) == "url" -> startFragment("URL", it.text, it.barcodeFormat);
+                    utils.getQrCodeType(it.text) == "phone" -> startFragment("Tel", it.text, it.barcodeFormat)
+                    utils.getQrCodeType(it.text) == "sms" -> startFragment("SMS", it.text, it.barcodeFormat)
+                    utils.getQrCodeType(it.text) == "email" -> startFragment("Email", it.text, it.barcodeFormat)
+                    utils.getQrCodeType(it.text) == "text" -> startFragment("Text", it.text, it.barcodeFormat)
+                    utils.getQrCodeType(it.text) == "wifi" -> startFragment("WiFi", it.text, it.barcodeFormat)
                     else -> {
                         "text"
                     }
@@ -97,11 +95,11 @@ class ScanCodeFragment : Fragment() {
 
     fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
 
-    fun startFragment(type: String, data: String, codeFormat: String) { //add code type (barcode, qrcode)
+    private fun startFragment(type: String, data: String, codeFormat: BarcodeFormat) { //add code type (barcode, qrcode)
         val bundle = Bundle()
         bundle.putString("QrType", type)
-        bundle.putString("QrData", data) ľ
-        bundle.putString("CodeType", codeFormat)
+        bundle.putString("QrData", data)
+        bundle.putString("CodeType", codeFormat.name)
 
         val fragment = Show_QR_Fragment()
         fragment.arguments = bundle

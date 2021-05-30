@@ -2,7 +2,10 @@ package com.example.qrcode
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import androidx.core.content.ContextCompat.startActivity
+import com.example.qrcode.Fragments.ScanCodeFragment
+import com.example.qrcode.Fragments.Show_QR_Fragment
 
 class Intents {
 
@@ -44,4 +47,37 @@ class Intents {
         //println(map["ssid"])
         //println(map["psk"])
     }
+
+    fun urlActivity(url: String): Intent {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        return intent
+    }
+
+    fun phoneActivity(number: String): Intent {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse(number)
+        return intent
+    }
+
+    fun emailActivity(data: String): Intent {
+        val msgCode = data.split(":")
+        val intent = Intent(Intent.ACTION_SEND)
+        val addressees = arrayOf(msgCode[2].split(";")[0])
+        intent.putExtra(Intent.EXTRA_EMAIL, addressees)
+        intent.putExtra(Intent.EXTRA_SUBJECT, msgCode[3].split(";")[0])
+        intent.putExtra(Intent.EXTRA_TEXT, msgCode[4].split(";")[0])
+        intent.type = "message/rfc822"
+        return Intent.createChooser(intent, "Send Email using:")
+
+    }
+
+    fun smsActivity(data: String): Intent {
+        val smsCode = data.split(":")
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("smsto:" + smsCode[1])
+        intent.putExtra("sms_body", smsCode[2]);
+        return intent
+    }
+
 }
