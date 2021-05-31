@@ -80,4 +80,10 @@ class Intents {
         return intent
     }
 
+    fun geoActivity(data: String): Intent {
+        val smsCode = data.split(":")
+        val intent = Intent(Intent.CATEGORY_APP_MAPS)
+        return intent
+    }
+
 }
