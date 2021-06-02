@@ -81,9 +81,14 @@ class Intents {
     }
 
     fun geoActivity(data: String): Intent {
-        val smsCode = data.split(":")
-        val intent = Intent(Intent.CATEGORY_APP_MAPS)
-        return intent
+        val location = data.split(":")
+        val mapIntent: Intent = Uri.parse(
+            "geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California"
+        ).let { location ->
+            // Or map point based on latitude/longitude
+            // val location: Uri = Uri.parse("geo:37.422219,-122.08364?z=14") // z param is zoom level
+            Intent(Intent.ACTION_VIEW, location)
+        }
     }
 
 }
