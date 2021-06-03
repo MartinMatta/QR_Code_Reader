@@ -86,7 +86,7 @@ class Intents {
             "geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California"
         ).let { location ->
             // Or map point based on latitude/longitude
-            // val location: Uri = Uri.parse("geo:37.422219,-122.08364?z=14") // z param is zoom level
+            val location: Uri = Uri.parse(location)
             Intent(Intent.ACTION_VIEW, location)
         }
     }
