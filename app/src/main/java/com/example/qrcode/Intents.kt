@@ -26,7 +26,6 @@ class Intents {
 
     fun getWifiInfo(data: String): MutableMap<String?, String?> {
         val wifiInfo: MutableMap<String?, String?> = HashMap()
-        // return T:WPA;S:mynetwork;P:mypass;;
         var dataBlock: List<String> = data.split(";")
 
         for (i in 0..dataBlock.size/2) {
