@@ -86,7 +86,7 @@ class Intents {
         ).let { location ->
             // Or map point based on latitude/longitude
             val location: Uri = Uri.parse(data)
-            Intent(Intent.ACTION_VIEW, location)
+            return Intent(Intent.ACTION_VIEW, location)
         }
     }
 
