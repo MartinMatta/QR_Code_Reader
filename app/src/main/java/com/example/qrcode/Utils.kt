@@ -16,6 +16,7 @@ class Utils {
             text.isValidUrl() -> "url"
             text.isValidSMS() -> "sms"
             text.isValidWiFi() -> "wifi"
+            text.isValidGeo() -> "geo"
             else -> {
                 "text"
             }
@@ -39,7 +40,7 @@ class Utils {
     }
 
     private fun String.isValidEmail(): Boolean {
-        if ("MATMSG:" in  this) { //mailto in this
+        if ("mailt:" in  this) { //mailto in this
             return true
         }
         return false

@@ -15,7 +15,7 @@ import com.example.qrcode.Intents
 import com.example.qrcode.QrCodeDatabase
 import com.example.qrcode.R
 
-class Show_QR_Fragment : Fragment(), BackPress {
+class Show_QR_Fragment : Fragment() {
 
     private var qrType: String = ""
     private var qrData: String = ""
@@ -185,10 +185,6 @@ class Show_QR_Fragment : Fragment(), BackPress {
         val text = "$number\n$msg"
         i.putExtra(Intent.EXTRA_TEXT, text)
         startActivity(Intent.createChooser(i, "Share URL"))
-    }
-
-    override fun onBackPressed() {
-        TODO("Not yet implemented")
     }
 
 }
