@@ -16,9 +16,6 @@ class DeleteDialog(private var context: Context,
         val mBuilder = AlertDialog.Builder(context)
                 .setView(mDialogView)
 
-        //mBuilder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mBuilder.create().window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         val btnCancel = mDialogView.findViewById<Button>(R.id.btnCancel)
         val btnOk = mDialogView.findViewById<Button>(R.id.btnOk)
 
