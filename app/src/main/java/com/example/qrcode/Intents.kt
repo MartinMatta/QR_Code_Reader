@@ -1,11 +1,13 @@
 package com.example.qrcode
 
+import android.R.attr.key
+import android.content.Context.WIFI_SERVICE
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import androidx.core.content.ContextCompat.startActivity
-import com.example.qrcode.Fragments.ScanCodeFragment
-import com.example.qrcode.Fragments.Show_QR_Fragment
+import android.net.wifi.WifiConfiguration
+import android.net.wifi.WifiManager
+import androidx.core.content.ContextCompat.getSystemService
+
 
 class Intents {
 
@@ -41,11 +43,24 @@ class Intents {
             }
 
         }
+
+        val wifiConfig = WifiConfiguration()
+        wifiConfig.SSID = java.lang.String.format("\"%s\"", dataBlock["ssid"])
+        wifiConfig.preSharedKey = String.format("\"%s\"", key)
+
+
+
+        val netId = wifiManager!!.addNetwork(wifiConfig)
+        wifiManager!!.disconnect()
+        wifiManager!!.enableNetwork(netId, true)
+        wifiManager!!.reconnect()
         return wifiInfo
         //println(map["auth_type"])
         //println(map["ssid"])
         //println(map["psk"])
     }
+
+
 
     fun urlActivity(url: String): Intent {
         val intent = Intent(Intent.ACTION_VIEW)
