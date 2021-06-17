@@ -44,16 +44,6 @@ class Intents {
 
         }
 
-        val wifiConfig = WifiConfiguration()
-        wifiConfig.SSID = java.lang.String.format("\"%s\"", dataBlock["ssid"])
-        wifiConfig.preSharedKey = String.format("\"%s\"", key)
-
-
-
-        val netId = wifiManager!!.addNetwork(wifiConfig)
-        wifiManager!!.disconnect()
-        wifiManager!!.enableNetwork(netId, true)
-        wifiManager!!.reconnect()
         return wifiInfo
         //println(map["auth_type"])
         //println(map["ssid"])
