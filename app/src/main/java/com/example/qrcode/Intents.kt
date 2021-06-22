@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.getSystemService
 
 class Intents {
 
-    private fun editEmail(data: String): String {
+    fun editEmail(data: String): String {
         val message = data.split(":")
         var email = message[2].split(";")[0]
         var subject = message[3].split(";")[0]
@@ -19,11 +19,19 @@ class Intents {
         return "$email\n$subject\n$msg"
     }
 
-    private fun editSMS(data: String): String {
+    fun editSMS(data: String): String {
         val message = data.split(":")
         var number = message[1].split(";")[0]
         var msg = message[2].split(";")[0]
         return  "$number\n$msg"
+    }
+
+    fun editWiFi(data: String): String {
+        val message = getWifiInfo(data)
+        val authType = message["auth_type"]
+        val ssid = message["ssid"]
+        val psk = message["psk"]
+        return  "Network Name: $ssid\nPassword: $psk\n"
     }
 
     fun getWifiInfo(data: String): MutableMap<String?, String?> {
@@ -134,6 +142,17 @@ class Intents {
         val text = "$number\n$msg"
         i.putExtra(Intent.EXTRA_TEXT, text)
         return Intent.createChooser(i, "Share URL")
+    }
+
+    fun shareWifi(data: String): Intent {
+        val message = getWifiInfo(data)
+        val authType = message["auth_type"]
+        val ssid = message["ssid"]
+        val psk = message["psk"]
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        i.putExtra(Intent.EXTRA_TEXT, "Network Name: $ssid\nPassword: $psk\n")
+        return Intent.createChooser(i, "Share text")
     }
 
 }
