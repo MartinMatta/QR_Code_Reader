@@ -39,11 +39,11 @@ class HistoryFragment : Fragment() {
         }
 
         listView.setOnItemClickListener {parent, view, position, id ->
-            //var id = data[position]
+            var dataset = data[position]
             //val deleteDialog = DeleteDialog(requireContext(), adapter, database.TABLE_HISTORY)
             //adapter = deleteDialog.show(data[position], database, id.id)
             //adapter.notifyDataSetChanged()
-            startFragment("url", "https", "barcode")
+            startFragment(dataset.title, dataset.desc, "barcode")
         }
 
         listView.emptyView = view.findViewById(R.id.emptyElement);

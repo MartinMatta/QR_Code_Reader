@@ -95,4 +95,45 @@ class Intents {
         }
     }
 
+    fun shareData(url: String): Intent {
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        i.putExtra(Intent.EXTRA_TEXT, url)
+        return Intent.createChooser(i, "Share text")
+    }
+
+    fun sharePhone(data: String): Intent {
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        val phone = data.replace("tel:", "")
+        i.putExtra(Intent.EXTRA_TEXT, phone)
+        //startActivity(Intent.createChooser(i, "Share URL"))
+        return Intent.createChooser(i, "Share Phone")
+    }
+
+    fun shareEmail(data: String): Intent {
+        val message = data.split(":")
+        var email = message[2].split(";")[0]
+        var subject = message[3].split(";")[0]
+        var msg = message[4].split(";")[0]
+
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        val text = "$email\n$subject\n$msg"
+        i.putExtra(Intent.EXTRA_TEXT, text)
+        return Intent.createChooser(i, "Share URL")
+    }
+
+    fun shareSMS(data: String): Intent {
+        val message = data.split(":")
+        var number = message[1].split(";")[0]
+        var msg = message[2].split(";")[0]
+
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        val text = "$number\n$msg"
+        i.putExtra(Intent.EXTRA_TEXT, text)
+        return Intent.createChooser(i, "Share URL")
+    }
+
 }

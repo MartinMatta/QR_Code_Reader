@@ -78,12 +78,12 @@ class Show_QR_Fragment : Fragment() {
 
         shareButton.setOnClickListener {
             when (true) {
-                qrType == "URL" -> shareData(qrData)
-                qrType == "SMS" -> shareSMS(qrData)
-                qrType == "Tel" -> sharePhone(qrData)
-                qrType == "Email" -> shareEmail(qrData)
+                qrType == "URL" -> startActivity(i.shareData(qrData))
+                qrType == "SMS" -> startActivity(i.shareSMS(qrData))
+                qrType == "Tel" -> startActivity(i.sharePhone(qrData))
+                qrType == "Email" -> startActivity(i.shareEmail(qrData))
                 else -> {
-                    shareData(qrData) // 1
+                    startActivity(i.shareData(qrData)) // 1
                 }
             }
         }
@@ -144,47 +144,6 @@ class Show_QR_Fragment : Fragment() {
         intent.data = Uri.parse("smsto:" + smsCode[1])
         intent.putExtra("sms_body", smsCode[2]);
         startActivity(intent)
-    }
-
-    private fun shareData(url: String) {
-        val i = Intent(Intent.ACTION_SEND)
-        i.type = "text/plain"
-        //i.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL")
-        i.putExtra(Intent.EXTRA_TEXT, url)
-        startActivity(Intent.createChooser(i, "Share URL"))
-    }
-
-    private fun sharePhone(data: String) {
-        val i = Intent(Intent.ACTION_SEND)
-        i.type = "text/plain"
-        val phone = data.replace("tel:", "")
-        i.putExtra(Intent.EXTRA_TEXT, phone)
-        startActivity(Intent.createChooser(i, "Share URL"))
-    }
-
-    private fun shareEmail(data: String) {
-        val message = data.split(":")
-        var email = message[2].split(";")[0]
-        var subject = message[3].split(";")[0]
-        var msg = message[4].split(";")[0]
-
-        val i = Intent(Intent.ACTION_SEND)
-        i.type = "text/plain"
-        val text = "$email\n$subject\n$msg"
-        i.putExtra(Intent.EXTRA_TEXT, text)
-        startActivity(Intent.createChooser(i, "Share URL"))
-    }
-
-    private fun shareSMS(data: String) {
-        val message = data.split(":")
-        var number = message[1].split(";")[0]
-        var msg = message[2].split(";")[0]
-
-        val i = Intent(Intent.ACTION_SEND)
-        i.type = "text/plain"
-        val text = "$number\n$msg"
-        i.putExtra(Intent.EXTRA_TEXT, text)
-        startActivity(Intent.createChooser(i, "Share URL"))
     }
 
 }

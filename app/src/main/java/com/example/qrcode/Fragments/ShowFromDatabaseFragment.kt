@@ -38,6 +38,9 @@ class ShowFromDatabaseFragment : Fragment() {
         val textQrType: TextView = view.findViewById(R.id.qr_type)
         val textQrData: TextView = view.findViewById(R.id.qr_data)
 
+        textQrData.text = qrData
+        textQrType.text = qrType
+
         val openButton: Button = view.findViewById(R.id.buttonOpen)
         val shareButton: Button = view.findViewById(R.id.buttonShare)
 

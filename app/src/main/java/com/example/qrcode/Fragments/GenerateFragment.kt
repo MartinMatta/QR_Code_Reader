@@ -57,14 +57,28 @@ import kotlin.system.exitProcess
 
         listView.setOnItemClickListener {parent, view, position, id ->
             var id = data[position]
-            val deleteDialog = DeleteDialog(requireContext(), adapter, database.TABLE_MY_CODE)
-            adapter = deleteDialog.show(data[position], database, id.id)
-            adapter.notifyDataSetChanged()
+            //val deleteDialog = DeleteDialog(requireContext(), adapter, database.TABLE_MY_CODE)
+            //adapter = deleteDialog.show(data[position], database, id.id)
+            //adapter.notifyDataSetChanged()
+            startFragment(id.title, id.desc, "barcode")
         }
 
         listView.emptyView = view.findViewById(R.id.emptyElement);
 
         return view
     }
+
+      fun startFragment(type: String, data: String, codeFormat: String) { //add code type (barcode, qrcode) použiva sa viacktrat
+          val bundle = Bundle()
+          bundle.putString("QrType", type)
+          bundle.putString("QrData", data)
+          bundle.putString("CodeType", codeFormat)
+
+          val fragment = ShowFromDatabaseFragment()
+          fragment.arguments = bundle
+          activity?.supportFragmentManager?.beginTransaction()
+                  ?.replace(R.id.frame, fragment)
+                  ?.commit();
+      }
 }
 
