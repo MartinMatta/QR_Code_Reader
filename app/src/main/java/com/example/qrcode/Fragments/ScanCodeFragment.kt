@@ -62,6 +62,7 @@ class ScanCodeFragment : Fragment() {
                     utils.getQrCodeType(it.text) == "email" -> startFragment("Email", it.text, it.barcodeFormat)
                     utils.getQrCodeType(it.text) == "text" -> startFragment("Text", it.text, it.barcodeFormat)
                     utils.getQrCodeType(it.text) == "wifi" -> startFragment("WiFi", it.text, it.barcodeFormat)
+                    utils.getQrCodeType(it.text) == "geo" -> startFragment("Location", it.text, it.barcodeFormat)
                     else -> {
                         "text"
                     }

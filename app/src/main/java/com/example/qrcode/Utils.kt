@@ -54,7 +54,7 @@ class Utils {
     }
 
     private fun String.isValidGeo(): Boolean {
-        if ("Geo:" in  this) {
+        if ("geo:" in  this) {
             return true
         }
         return false

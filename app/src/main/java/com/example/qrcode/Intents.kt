@@ -11,6 +11,10 @@ import androidx.core.content.ContextCompat.getSystemService
 
 class Intents {
 
+    fun editTel(data: String): String {
+        return data.split(":")[1]
+    }
+
     fun editEmail(data: String): String {
         val message = data.split(":")
         var email = message[2].split(";")[0]
@@ -24,6 +28,11 @@ class Intents {
         var number = message[1].split(";")[0]
         var msg = message[2].split(";")[0]
         return  "$number\n$msg"
+    }
+
+    fun editGeo(data: String): String {
+        return data.split(":")[1]
+
     }
 
     fun editWiFi(data: String): String {
@@ -93,14 +102,12 @@ class Intents {
     }
 
     fun geoActivity(data: String): Intent {
-        val location = data.split(":")
-        val mapIntent: Intent = Uri.parse(
-            "geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California"
-        ).let { location ->
-            // Or map point based on latitude/longitude
-            val location: Uri = Uri.parse(data)
-            return Intent(Intent.ACTION_VIEW, location)
-        }
+        val location = data.split(":")[1]
+        val loc1 = location.split(",")[0]
+        val loc2 = location.split(",")[1]
+        val url = "http://maps.google.com/maps?q=$loc1,$loc2"
+        //val url = "http://maps.google.com/maps?q=51.41696706647759,5.445270538330078"
+        return Intent.createChooser(urlActivity(url), "open maps")
     }
 
     fun shareData(url: String): Intent {
