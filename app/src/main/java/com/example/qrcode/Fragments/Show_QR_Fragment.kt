@@ -54,11 +54,11 @@ class Show_QR_Fragment : Fragment() {
 
         when (true) {
             qrType == "URL" -> textQrData.text = qrData
-            qrType == "SMS" -> textQrData.text = editSMS(qrData)
-            qrType == "Tel" -> textQrData.text = qrData.split(":")[1]
-            qrType == "Email" -> textQrData.text = editEmail(qrData)
-            qrType == "WiFi" -> textQrData.text = qrData//editEmail(qrData)
-            qrType == "Geo" -> textQrData.text = qrData
+            qrType == "SMS" -> textQrData.text = i.editSMS(qrData)
+            qrType == "Tel" -> textQrData.text = i.editTel(qrData)
+            qrType == "Email" -> textQrData.text = i.editEmail(qrData)
+            qrType == "WiFi" -> textQrData.text = i.editWiFi(qrData)
+            qrType == "geo" -> textQrData.text = qrData
             else -> {
                 textQrData.text = qrData
             }
@@ -70,6 +70,7 @@ class Show_QR_Fragment : Fragment() {
                 qrType == "SMS" -> startActivity(i.smsActivity(qrData))
                 qrType == "Tel" -> startActivity(i.phoneActivity(qrData))
                 qrType == "Email" -> startActivity(i.emailActivity(qrData))
+                qrType == "Location" -> startActivity(i.geoActivity(qrData))
                 else -> {
                     textQrData.text = qrData
                 }
@@ -82,6 +83,7 @@ class Show_QR_Fragment : Fragment() {
                 qrType == "SMS" -> startActivity(i.shareSMS(qrData))
                 qrType == "Tel" -> startActivity(i.sharePhone(qrData))
                 qrType == "Email" -> startActivity(i.shareEmail(qrData))
+                qrType == "WiFi" -> startActivity(i.shareWifi(qrData))
                 else -> {
                     startActivity(i.shareData(qrData)) // 1
                 }
@@ -97,21 +99,6 @@ class Show_QR_Fragment : Fragment() {
                 ?.commit();
         }
         return view
-    }
-
-    private fun editEmail(data: String): String {
-        val message = data.split(":")
-        var email = message[2].split(";")[0]
-        var subject = message[3].split(";")[0]
-        var msg = message[4].split(";")[0]
-        return "$email\n$subject\n$msg"
-    }
-
-    private fun editSMS(data: String): String {
-        val message = data.split(":")
-        var number = message[1].split(";")[0]
-        var msg = message[2].split(";")[0]
-        return  "$number\n$msg"
     }
 
     private fun openURL(url: String) {
