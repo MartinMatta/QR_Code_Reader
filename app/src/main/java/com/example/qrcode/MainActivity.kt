@@ -17,11 +17,8 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
-    private var backPressedTime: Long = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //theme.applyStyle(R.style.Theme_Scan, true)
 
         setContentView(R.layout.activity_main)
 
@@ -52,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun startFragment(fragment: Fragment) {
         supportFragmentManager
